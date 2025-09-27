@@ -2,6 +2,6 @@
 2 preloader
 3 header
 4 banner
-5 section
+5 sections
 6 footer
 7 js_scripts

@@ -1,0 +1,7 @@
+1 head
+2 preloader
+3 header
+4 banner
+5 section
+6 footer
+7 js_scripts
