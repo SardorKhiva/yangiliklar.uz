@@ -15,8 +15,6 @@ $pageItem = array_filter($getMenuItems, function ($item) use ($currentFile) {
 });
 $pageItem = reset($pageItem);
 $currentPage = !empty($pageItem['name']) ? $pageItem['name'] : SITE_NAME;
-
-
 ?>
 
 <!-- Header -->
