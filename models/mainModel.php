@@ -1,4 +1,5 @@
 <?php
 // mainModel.php
 
-//echo 'Bu model fayli \n';
+// asosiy modelga menu modelni ulash
+require_once MENU_MODEL_PATH;

@@ -1,14 +1,11 @@
 <?php
 // views/index.php
-
 require_once dirname(__DIR__) . '/config/CONSTANTS.php';
+require_once SQLITE_PDO_CONN;  // SQLite ga ulanish
+
 
 // asosiy controller ni views/index.php ga qo'shish
-if (file_exists(MAIN_CONTROLLER)) {
-    require_once MAIN_CONTROLLER;
-} else {
-    echo 'main controller papkasi yo\'q';
-}
+require_once MAIN_CONTROLLER;
 
 /*
 1 head
