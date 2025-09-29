@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/CONSTANTS.php';
-require_once SQLITE_PDO_CONN; // sqlite ga ulanish
-
+// menu elementlari haqidagi ma'lumotlarni o'zida saqlovchi sqlite bazadagi menu jadvalidan ma'lumot oluvchi fayl
 function getMenuItems()
 {
     global $pdo;    // pdo obyekti
@@ -15,4 +13,3 @@ function getMenuItems()
     return $stmt->fetchAll(PDO::FETCH_ASSOC); // natijani assotsiativ massiv sifatida yubor
 
 }
-//getMenuItems();
