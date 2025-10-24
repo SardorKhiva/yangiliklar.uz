@@ -1,7 +1,10 @@
 <?php
 
+//$currentPage = 'Biz bilan aloqa';
+
 require_once __DIR__ . '/../config/CONSTANTS.php';
-require_once PAGE_DETAILS;  // sahifa haqidagi ma'lumotlar
+require_once MAIN_CONTROLLER;
+require_once SQLITE_PDO_CONN;  // SQLite ga ulanish
 
 require_once HEAD_INDEX;
 require_once PRELOADER_INDEX;

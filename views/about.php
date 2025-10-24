@@ -1,10 +1,23 @@
 <?php
 require_once __DIR__ . '/../config/CONSTANTS.php';  // asosiy birlik va yo'llar
-require_once PAGE_DETAILS;  // sahifa haqidagi ma'lumotlar
+require_once MAIN_CONTROLLER;
+require_once SQLITE_PDO_CONN;  // SQLite ga ulanish
 
-// sahifa semantik qismlari
-require_once HEAD_INDEX;  // barcha head lar index.php dan dinamik olinadi
+//$currentPage = $getMenuItems['name'];
+
+/*
+1 head
+2 preloader
+3 header
+4 banner
+5 section
+6 footer
+7 js_scripts
+*/
+
+require_once HEAD_INDEX;
 require_once PRELOADER_INDEX;
+//require_once HEADER_ABOUT;
 require_once HEADER_INDEX;
 require_once BANNER_ABOUT;
 require_once SECTION_ABOUT;
