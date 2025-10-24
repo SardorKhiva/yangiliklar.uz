@@ -1,10 +1,7 @@
 <?php
 // views/news.php
-//$currentPage = 'Yangiliklar';
-
 require_once __DIR__ . '/../config/CONSTANTS.php';
-require_once MAIN_CONTROLLER;
-require_once SQLITE_PDO_CONN;
+require_once PAGE_DETAILS;  // sahifa haqidagi ma'lumotlar
 
 
 require_once HEAD_INDEX;

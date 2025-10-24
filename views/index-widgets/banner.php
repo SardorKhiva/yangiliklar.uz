@@ -1,8 +1,3 @@
-<?php
-//echo __DIR__;
-
-?>
-
 <!-- Banner Starts Here -->
 <div class="main-banner header-text">
     <div class="container-fluid">
@@ -56,7 +51,7 @@
                 </div>
             </div>
             <div class="item">
-<!--                TODO -->
+                <!--                TODO -->
                 <img src="./../../assets/images/banner-item-04.jpg" alt="">
                 <div class="item-content">
                     <div class="main-content">
