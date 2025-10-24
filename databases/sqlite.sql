@@ -1,17 +1,17 @@
 --- MENU TABLE ---
 -- sahifalar tepasidagi menu uchun menu jadvalini hosil qilish
 
-DROP TABLE IF EXISTS `menu`;  -- jadvalni o'chirish
+-- DROP TABLE IF EXISTS `menu`;  -- jadvalni o'chirish
 
 -- jadval tuzilishi
 CREATE TABLE IF NOT EXISTS `menu`
 (
     `id`       INTEGER PRIMARY KEY AUTOINCREMENT,
 --     `language` VARCHAR(30)  NOT NULL DEFAULT 'UZB-LAT', --  'sahifa tili',
-    `name`     VARCHAR(255) NOT NULL,                   --  'sahifa nomi',
-    `position` INT UNIQUE,                              --  'har bir menyu nomi turgan joyi',
-    `url`      VARCHAR(255),                            --  'sahifa manzili',
-    `status`   BOOLEAN               DEFAULT 1          --  'page on/off status'
+    `name`     VARCHAR(255) NOT NULL, --  'sahifa nomi',
+    `position` INT UNIQUE,            --  'har bir menyu nomi turgan joyi',
+    `url`      VARCHAR(255),          --  'sahifa manzili',
+    `status`   BOOLEAN DEFAULT 1      --  'page on/off status'
 );
 
 
@@ -29,7 +29,45 @@ FROM `menu`
 WHERE `status` = 1;
 
 
+--- CATEGORY TABLE --- 
+-- DROP TABLE IF EXISTS `category`;
 
+CREATE TABLE IF NOT EXISTS `category`
+(
+    `id`     INTEGER PRIMARY KEY AUTOINCREMENT,
+    `name`   TEXT,
+    `status` BOOLEAN DEFAULT 1
+);
+
+INSERT INTO `category`(`name`)
+VALUES ("O'zbekiston"),
+       ("Jahon"),
+       ("Iqtisodiyot"),
+       ("Jamiyat"),
+       ("Sport"),
+       ("Texnologiya"),
+       ("Moliya"),
+       ("Audio"),
+       ("Ta'lim"),
+       ("Avto"),
+       ("Sog'lom hayot"),
+       ("Ko'chmas mulk"),
+       ("Ayollar dunyosi"),
+       ("Turizm"),
+       ("Biznes");
+
+
+--- AUTHOR TABLE ---
+-- DROP TABLE `author`;
+CREATE TABLE IF NOT EXISTS `author`
+(
+    `id`   INTEGER PRIMARY KEY AUTOINCREMENT,
+    `name` TEXT UNIQUE NOT NULL
+);
+
+INSERT INTO `author` (`name`)
+VALUES ('Admin'),
+       ("Sardor Yusupov");
 
 -- DROP TABLE IF EXISTS `news`;
 
@@ -50,19 +88,25 @@ CREATE TABLE IF NOT EXISTS `news`
 );
 
 INSERT INTO `news`
-    (`theme_id`, `title`, `img_url`, `content`, `author_id`)
-VALUES (1, '1-Banner sarlavhasi', '/assets/images/banner-item-01.jpg', 'Bu 1-post mazmuni', 4),
-       (2, '2-Banner sarlavhasi', '/assets/images/banner-item-02.jpg', 'Bu 2-post mazmuni', 4),
+    (`theme_id`, `title`, `img_url`, `description`, `content`, `author_id`)
+VALUES
+    (1,
+        '16 ta tuman va shaharda mahalliy boshqaruv organlari uchun yangi ma’muriy binolar quriladi',
+        'assets/images/kun_uz_news_001.png',
+        'Ularning 1- va 2-qavatlari ustuvor ravishda savdo va servis faoliyatini amalga oshirish uchun belgilangan tartibda E-auksion elektron savdo platformasida elektron onlayn-auksion savdolari orqali ijaraga beriladi.',
+        '«Jadal kompleks rivojlantirish uchun tanlab olingan tumanlar va shaharlarda mahalliy boshqaruv organlarini optimal joylashtirish orqali ularning bino va inshootlari o‘rnida biznes loyihalarni amalga oshirish chora-tadbirlari to‘g‘risida»gi hukumat qarori qabul qilindi.',
+        1)
+
+/*  ,       (2, '2-Banner sarlavhasi', '/assets/images/banner-item-02.jpg', 'Bu 2-post mazmuni', 4),
        (3, '3-Banner sarlavhasi', '/assets/images/banner-item-03.jpg', 'Bu 3-post mazmuni', 4),
        (1, '4-Banner sarlavhasi', '/assets/images/banner-item-04.jpg', 'Bu 4-post mazmuni', 4),
        (2, '5-Banner sarlavhasi', '/assets/images/banner-item-05.jpg', 'Bu 5-post mazmuni', 4),
        (3, '6-Banner sarlavhasi', '/assets/images/banner-item-06.jpg', 'Bu 6-post mazmuni', 4)
-;
+ */
+    ;
 
 SELECT *
 FROM `news`;
-
-
 
 
 -- DROP TABLE IF EXISTS `social`;
