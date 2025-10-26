@@ -8,14 +8,17 @@
  */
 function dd(array $arr, bool $die = false): void
 {
-    echo "<pre>";
+    echo '<pre>';
     print_r($arr);
-    echo "</pre>";
+    echo '</pre>';
+
+    // PhpStorm "unreachable" deb o‘ylamasligi uchun
     if ($die) {
-        die();
+        exit; // exit() o‘rniga shart bilan to‘xtatish
+    } else {
+        flush(); // chiqishni majburan ko‘rsatish
     }
 }
-
 function getImage(string $folder, int $id, string $filename): string
 {
     if (empty($filename)) {
