@@ -31,6 +31,7 @@ const MAIN_MODEL = PROJECT_ROOT . '/models/mainModel.php';  // asosiy model yo'l
 const MENU_MODEL_PATH = PROJECT_ROOT . '/models/menuModel.php';
 const SOCIAL_MODEL_PATH = PROJECT_ROOT . '/models/socialModel.php';
 const NEWS_MODEL_PATH = PROJECT_ROOT . '/models/newsModel.php';
+const CATEGORIES_MODEL_PATH = PROJECT_ROOT . '/models/categoryModel.php';
 
 
 // Assets (frontend fayllar)

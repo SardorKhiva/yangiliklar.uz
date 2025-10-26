@@ -1,3 +1,7 @@
+/**
+ * Saytdagi ma'lumotlar bazasi, SQLite da
+ */
+
 --- MENU TABLE ---
 -- sahifalar tepasidagi menu uchun menu jadvalini hosil qilish
 
@@ -30,7 +34,7 @@ WHERE `status` = TRUE;
 
 
 --- CATEGORY TABLE --- 
-DROP TABLE IF EXISTS `category`;
+-- DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE IF NOT EXISTS `category`
 (
@@ -82,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `news`
     `description` VARCHAR(500) DEFAULT NULL, -- 'post qisqa tavsifi',
     `content`     TEXT,                      -- 'post mazmuni',
     `author_id`   INTEGER      DEFAULT NULL, -- 'post muallifi',
-    `theme_id`    INTEGER      DEFAULT NULL, -- 'post mavzusi',
+    `category_id`    INTEGER      DEFAULT NULL, -- 'post mavzusi',
     `img_url`     VARCHAR(255) NOT NULL,     -- 'rasm havolasi',
     `seen_count`  INTEGER      DEFAULT 0,    --  'ko''rishlar soni',
     `created_at`  DATETIME     DEFAULT CURRENT_TIMESTAMP,
@@ -90,14 +94,14 @@ CREATE TABLE IF NOT EXISTS `news`
 );
 
 INSERT INTO `news`
-    (`theme_id`, `title`, `img_url`, `description`, `content`, `author_id`)
+    (`category_id`, `title`, `img_url`, `description`, `content`, `author_id`)
 VALUES
     (1,
         '16 ta tuman va shaharda mahalliy boshqaruv organlari uchun yangi ma’muriy binolar quriladi',
         'assets/images/kun_uz_news_001.png',
         'Ularning 1- va 2-qavatlari ustuvor ravishda savdo va servis faoliyatini amalga oshirish uchun belgilangan tartibda E-auksion elektron savdo platformasida elektron onlayn-auksion savdolari orqali ijaraga beriladi.',
         '«Jadal kompleks rivojlantirish uchun tanlab olingan tumanlar va shaharlarda mahalliy boshqaruv organlarini optimal joylashtirish orqali ularning bino va inshootlari o‘rnida biznes loyihalarni amalga oshirish chora-tadbirlari to‘g‘risida»gi hukumat qarori qabul qilindi.',
-        1)
+        2)
 
 /*  ,       (2, '2-Banner sarlavhasi', '/assets/images/banner-item-02.jpg', 'Bu 2-post mazmuni', 4),
        (3, '3-Banner sarlavhasi', '/assets/images/banner-item-03.jpg', 'Bu 3-post mazmuni', 4),

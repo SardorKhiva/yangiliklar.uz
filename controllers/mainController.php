@@ -7,11 +7,6 @@ require_once MAIN_MODEL;  // asosiy modelni qo'shish
 // modeldagi ma'lumotlarni olish
 $getMenuItems = getMenuItems();
 $getSocailMediaItems = getSocialMediaItems();
-$getLastNews = getLastNews();
+$news = getLastNews();
 
-// tekshirish uchun:
-/*
-echo "<pre>";
-print_r($getLastNews);
-echo "</pre>";
-*/
+dd(getCategoryNameById(1));
