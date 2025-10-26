@@ -1,4 +1,3 @@
-
 <section class="call-to-action">
     <div class="container">
         <div class="row">
@@ -28,20 +27,23 @@
             <div class="col-lg-8">
                 <div class="all-blog-posts">
                     <div class="row">
+                        <?php if(!empty($news)): ?>
+                        <?php foreach($news as $newsItem): ?>
+                        <?php dd($news, 0) ?>
                         <div class="col-lg-12">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                    <img src="/assets/images/blog-post-01.jpg" alt="">
+                                    <img src="<?=$newsItem['img_url']; ?>" alt="<?= htmlspecialchars($newsItem['title']); ?>">
                                 </div>
                                 <div class="down-content">
-                                    <span>Lifestyle</span>
-                                    <a href="../news-details.php"><h4>Best Template Website for HTML CSS</h4></a>
+                                    <span> <?= $newsItem['category_name'] ?> </span>
+                                    <a href="?controller=news_view&id=<?=$newsItem['news_id'] ?>"><h4> <?=htmlspecialchars($newsItem['title']) ?> </h4></a>
                                     <ul class="post-info">
-                                        <li><a href="#">Admin</a></li>
-                                        <li><a href="#">May 31, 2020</a></li>
-                                        <li><a href="#">12 Comments</a></li>
+                                        <li> <a> <?= $newsItem['author_name'] ?> </a></li>
+                                        <li> <a> <?= date('d.m.Y | H:i' , strtotime($newsItem['created_at']))?> </a> </li>
+                                        <li> <a> <i class="fas fa-eye" ></i> <?= $newsItem['seen_count'] ?> </a></li>
                                     </ul>
-                                    <p>Stand Blog is a free HTML CSS template for your CMS theme. You can easily adapt or customize it for any kind of CMS or website builder. You are allowed to use it for your business. You are NOT allowed to re-distribute the template ZIP file on any template collection site for the download purpose. <a rel="nofollow" href="https://templatemo.com/contact" target="_parent">Contact TemplateMo</a> for more info. Thank you.</p>
+                                    <p> <?= $newsItem['description'] ?> </p>
                                     <div class="post-options">
                                         <div class="row">
                                             <div class="col-6">
@@ -63,6 +65,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <!--
                         <div class="col-lg-12">
                             <div class="blog-post">
                                 <div class="blog-thumb">
@@ -133,6 +140,8 @@
                                 </div>
                             </div>
                         </div>
+
+-->
                         <div class="col-lg-12">
                             <div class="main-button">
                                 <a href="../news.php">View All Posts</a>
