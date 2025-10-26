@@ -7,6 +7,7 @@ const SITE_NAME = 'Yangiliklar.uz';
 define('PROJECT_ROOT', dirname(__DIR__)); // loyiha asosiy ildiz papkasi
 //const PROJECT_ROOT = __DIR__ . '/..'; // Loyiha ildiz papkasi
 const PAGE_DETAILS = PROJECT_ROOT . '/views/page_details.php';
+const HELPERS_PATH = PROJECT_ROOT . '/helpers.php';
 
 // bazalar parametrlari
 // database connect path
@@ -21,13 +22,15 @@ const DB_USER = 'root';
 const DB_PASSWORD = '';
 const MYSQL_DSN = 'mysql:host=' . HOST . ';port=' . PORT . ';dbname=' . DB_NAME;
 
-const ACTIVE = 1;
-const INACTIVE = 0;
+const ACTIVE = TRUE;
+const INACTIVE = FALSE;
 
+// Modellar yo'llari:
 const MAIN_CONTROLLER = PROJECT_ROOT . '/controllers/mainController.php'; // asosiy controller yo'li
 const MAIN_MODEL = PROJECT_ROOT . '/models/mainModel.php';  // asosiy model yo'li
 const MENU_MODEL_PATH = PROJECT_ROOT . '/models/menuModel.php';
 const SOCIAL_MODEL_PATH = PROJECT_ROOT . '/models/socialModel.php';
+const NEWS_MODEL_PATH = PROJECT_ROOT . '/models/newsModel.php';
 
 
 // Assets (frontend fayllar)
