@@ -8,6 +8,7 @@ require_once HELPERS_PATH;  // debug funksiyalar
 // asosiy modelga boshqa modellarni ulash
 require_once MENU_MODEL_PATH;   // asosiy modelga menu modeli
 require_once SOCIAL_MODEL_PATH; // ijtimoiy tarmoqlar modeli
-require_once NEWS_MODEL_PATH;   // ynagiliklar modeli
+require_once NEWS_MODEL_PATH;   // yangiliklar modeli
+require_once CATEGORIES_MODEL_PATH; // kategoriyalar modeli
 
-dd(getLastNews(), 1);
+//dd(getLastNews(), 1);
