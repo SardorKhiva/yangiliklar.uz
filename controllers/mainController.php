@@ -8,5 +8,3 @@ require_once MAIN_MODEL;  // asosiy modelni qo'shish
 $getMenuItems = getMenuItems();
 $getSocailMediaItems = getSocialMediaItems();
 $news = getLastNews();
-
-dd(getCategoryNameById(1));
