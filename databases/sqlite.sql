@@ -1,8 +1,8 @@
 --- MENU TABLE ---
 -- sahifalar tepasidagi menu uchun menu jadvalini hosil qilish
 
--- DROP TABLE IF EXISTS `menu`;  -- jadvalni o'chirish
 
+-- DROP TABLE IF EXISTS `menu`;  -- jadvalni o'chirish
 -- jadval tuzilishi
 CREATE TABLE IF NOT EXISTS `menu`
 (
@@ -11,13 +11,13 @@ CREATE TABLE IF NOT EXISTS `menu`
     `name`     VARCHAR(255) NOT NULL, --  'sahifa nomi',
     `position` INT UNIQUE,            --  'har bir menyu nomi turgan joyi',
     `url`      VARCHAR(255),          --  'sahifa manzili',
-    `status`   BOOLEAN DEFAULT 1      --  'page on/off status'
+    `status`   BOOLEAN DEFAULT TRUE      --  'page on/off status'
 );
 
 
 -- jadvalga yozuvlar qo'shish
 INSERT INTO `menu`(`name`, `position`, `url`, `status`)
-VALUES ('Asosiy sahifacha', 1, '/index.php', 1),
+VALUES ('Asosiy sahifa', 1, '/index.php', 1),
        ('Biz haqimizda', 2, '/about.php', 1),
        ('Yangiliklar', 3, '/news.php', 1),
        ('Yangilik tafsilotlari', 4, '/news-details.php', 1),
@@ -26,17 +26,17 @@ VALUES ('Asosiy sahifacha', 1, '/index.php', 1),
 
 SELECT *
 FROM `menu`
-WHERE `status` = 1;
+WHERE `status` = TRUE;
 
 
 --- CATEGORY TABLE --- 
--- DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE IF NOT EXISTS `category`
 (
     `id`     INTEGER PRIMARY KEY AUTOINCREMENT,
     `name`   TEXT,
-    `status` BOOLEAN DEFAULT 1
+    `status` BOOLEAN DEFAULT TRUE
 );
 
 INSERT INTO `category`(`name`)
@@ -69,13 +69,15 @@ INSERT INTO `author` (`name`)
 VALUES ('Admin'),
        ("Sardor Yusupov");
 
+
+--- NEW TABLE ---
 -- DROP TABLE IF EXISTS `news`;
 
 CREATE TABLE IF NOT EXISTS `news`
 (
     `id`          INTEGER PRIMARY KEY AUTOINCREMENT,
-    `status`      BOOLEAN      DEFAULT 1,    -- 'postni faol/nofaol qilish',
-    `is_banner`   BOOLEAN      DEFAULT '1',  -- 'post bannerda chiqsinmi',
+    `status`      BOOLEAN      DEFAULT TRUE,    -- 'postni faol/nofaol qilish',
+    `is_banner`   BOOLEAN      DEFAULT TRUE,  -- 'post bannerda chiqsinmi',
     `title`       VARCHAR(255) NOT NULL,     -- 'post sarlavhasi',
     `description` VARCHAR(500) DEFAULT NULL, -- 'post qisqa tavsifi',
     `content`     TEXT,                      -- 'post mazmuni',
@@ -106,10 +108,12 @@ VALUES
     ;
 
 SELECT *
-FROM `news`;
+FROM `news`
+WHERE `status` = TRUE;
 
 
--- DROP TABLE IF EXISTS `social`;
+--- SOCIAL MEDIA ICONS TABLE ---
+DROP TABLE IF EXISTS `social`;
 CREATE TABLE IF NOT EXISTS `social`
 (
     `id`         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -117,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `social`
     `icon_class` VARCHAR(255) DEFAULT NULL,    --  'Font Awesome dan icon lar classi',
     `url`        VARCHAR(255) NOT NULL,        --  'tarmoq manzili',
     `position`   SMALLINT UNSIGNED,            -- maksimum 65 536 tarmoq qo'shsa bo'ladi
-    `status`     BOOLEAN      DEFAULT 1        --  'yozuv holati, odatda faol'
+    `status`     BOOLEAN      DEFAULT TRUE        --  'yozuv holati, odatda faol'
 );
 
 INSERT INTO `social` (`name`, `icon_class`, `url`, `position`)
@@ -130,4 +134,5 @@ VALUES ('Facebook', 'fa-brands fa-facebook fa-2x', 'https://www.facebook.com/moh
        ('Dribble', 'fa-brands fa-dribbble fa-2x', 'https://dribbble.com/search/mohirdev', 6);
 
 SELECT *
-FROM `social`;
+FROM `social`
+WHERE `status` = TRUE;
