@@ -34,8 +34,10 @@
                         <div class="col-lg-12">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-<!--                                    <img src="--><?php //=$newsItem['img_url']; ?><!--" alt="--><?php //= htmlspecialchars($newsItem['title']); ?><!--">-->
-                                    <img style="width: 770px; height: 340px" src="<?=$image; ?>" alt="<?=htmlspecialchars($newsItem['title'])?>"
+                          <a href="?controller=news_view&id=<?=$newsItem['news_id'] ?>">
+                                    <img style="width: 610px; height: 269px" src="<?=$image; ?>"
+                                         alt="<?=htmlspecialchars($newsItem['title'])?>"
+                          </a>
                                 </div>
                                 <div class="down-content">
                                     <span> <?= $newsItem['category_name'] ?> </span>
@@ -45,7 +47,9 @@
                                         <li> <a> <?= date('d.m.Y | H:i' , strtotime($newsItem['created_at']))?> </a> </li>
                                         <li> <a> <i class="fas fa-eye" ></i> <?= $newsItem['seen_count'] ?> </a></li>
                                     </ul>
+                                    <a href="?controller=news_view&id=<?=$newsItem['news_id'] ?>">
                                     <p> <?= $newsItem['description'] ?> </p>
+                                    </a>
                                     <div class="post-options">
                                         <div class="row">
                                             <div class="col-6">
