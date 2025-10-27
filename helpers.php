@@ -19,14 +19,21 @@ function dd(array $arr, bool $die = false): void
         flush(); // chiqishni majburan ko‘rsatish
     }
 }
-function getImage(string $folder, int $id, string $filename): string
+
+
+function getImage(string $table_name, int $id, string $filename): string
 {
     if (empty($filename)) {
-        return 'assets/images/default.jpg';
+        return '/assets/images/default.jpg';
     }
-    $imagepath = "uploads/$folder/$id/$filename";
-    if (file_exists($imagepath)) {
-        return $imagepath;
+
+    $relativePath = "uploads/$table_name/$id/$filename";
+
+    // absolyut yo'ldan qidirish
+    if (file_exists(PROJECT_ROOT . $relativePath)) {
+        // absolyut yo'lni qaytarish
+        return '/' . $relativePath;
     }
-    return 'assets/images/default.jpg';
+
+    return '/assets/images/default.jpg';
 }
