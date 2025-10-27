@@ -29,7 +29,7 @@ function getLastNews(): array
             `n`.`created_at`,               -- Yangilik yozilgan va ma'lumotlar bazasiga qo'shilgan sana va vaqti.
             `n`.`description`,              -- Yangilikning qisqa mazmuni, xulosasi yoki tavsifi.
             `n`.`content`,                  -- Yangilikning to'liq matni.
-            `n`.`img_url`,                  -- Yangilik rasmi (banneri) joylashgan fayl yo'li (URL).
+            `n`.`img_name`,                 -- Yangilikdagi rasm nomi
             `c`.`name` AS `category_name`   -- `category` jadvalidan olingan yangilikning kategoriyasi nomi.
             FROM `news` AS `n`              -- SQL so'rovi uchun asosiy jadval sifatida `news` jadvali tanlanadi, unga `n` taxallusi beriladi.
             INNER JOIN `author` AS `a`      -- `news` jadvalini `author` jadvali bilan ichki bog'lash (ulanmoq). `a` taxallusi beriladi.

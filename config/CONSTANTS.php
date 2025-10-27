@@ -4,8 +4,9 @@
 // Bu faylda fayllarga yo'llar va asosiy constantalar saqlanadi
 
 const SITE_NAME = 'Yangiliklar.uz';
-define('PROJECT_ROOT', dirname(__DIR__)); // loyiha asosiy ildiz papkasi
-//const PROJECT_ROOT = __DIR__ . '/..'; // Loyiha ildiz papkasi
+//define('PROJECT_ROOT', dirname(__DIR__)); // loyiha asosiy ildiz papkasi
+//const PROJECT_ROOT = __DIR__ . '/../'; // Loyiha ildiz papkasi
+define('PROJECT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/');
 const PAGE_DETAILS = PROJECT_ROOT . '/views/page_details.php';
 const HELPERS_PATH = PROJECT_ROOT . '/helpers.php';
 

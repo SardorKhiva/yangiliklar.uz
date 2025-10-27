@@ -75,7 +75,7 @@ VALUES ('Admin'),
 
 
 --- NEW TABLE ---
--- DROP TABLE IF EXISTS `news`;
+DROP TABLE IF EXISTS `news`;
 
 CREATE TABLE IF NOT EXISTS `news`
 (
@@ -87,29 +87,32 @@ CREATE TABLE IF NOT EXISTS `news`
     `content`     TEXT,                      -- 'post mazmuni',
     `author_id`   INTEGER      DEFAULT NULL, -- 'post muallifi',
     `category_id`    INTEGER      DEFAULT NULL, -- 'post mavzusi',
-    `img_url`     VARCHAR(255) NOT NULL,     -- 'rasm havolasi',
+--     `img_url`     VARCHAR(255) NOT NULL,     -- 'rasm havolasi',
+    `img_name`    TEXT NOT NULL UNIQUE,      -- 'rasm nomi'
     `seen_count`  INTEGER      DEFAULT 0,    --  'ko''rishlar soni',
     `created_at`  DATETIME     DEFAULT CURRENT_TIMESTAMP,
     `updated_at`  DATETIME     DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO `news`
-    (`category_id`, `title`, `img_url`, `description`, `content`, `author_id`)
+    (`category_id`, `title`, `img_name` , `description`, `content`, `author_id`)
 VALUES
     (1,
         '16 ta tuman va shaharda mahalliy boshqaruv organlari uchun yangi ma’muriy binolar quriladi',
-        'assets/images/kun_uz_news_001.png',
+     'kun_uz_news_001.png',
         'Ularning 1- va 2-qavatlari ustuvor ravishda savdo va servis faoliyatini amalga oshirish uchun belgilangan tartibda E-auksion elektron savdo platformasida elektron onlayn-auksion savdolari orqali ijaraga beriladi.',
         '«Jadal kompleks rivojlantirish uchun tanlab olingan tumanlar va shaharlarda mahalliy boshqaruv organlarini optimal joylashtirish orqali ularning bino va inshootlari o‘rnida biznes loyihalarni amalga oshirish chora-tadbirlari to‘g‘risida»gi hukumat qarori qabul qilindi.',
         2)
 
-/*  ,       (2, '2-Banner sarlavhasi', '/assets/images/banner-item-02.jpg', 'Bu 2-post mazmuni', 4),
-       (3, '3-Banner sarlavhasi', '/assets/images/banner-item-03.jpg', 'Bu 3-post mazmuni', 4),
-       (1, '4-Banner sarlavhasi', '/assets/images/banner-item-04.jpg', 'Bu 4-post mazmuni', 4),
-       (2, '5-Banner sarlavhasi', '/assets/images/banner-item-05.jpg', 'Bu 5-post mazmuni', 4),
-       (3, '6-Banner sarlavhasi', '/assets/images/banner-item-06.jpg', 'Bu 6-post mazmuni', 4)
- */
     ;
+
+-- img_url ustunini o'chirish
+/*
+ALTER TABLE
+    `news`
+DROP COLUMN
+    `img_url`;
+*/
 
 SELECT *
 FROM `news`

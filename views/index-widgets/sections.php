@@ -29,11 +29,13 @@
                     <div class="row">
                         <?php if(!empty($news)): ?>
                         <?php foreach($news as $newsItem): ?>
-                        <?php dd($news, 0) ?>
+                        <!--  rasm yo'li  -->
+                            <?php $image = getImage('news', $newsItem['news_id'], $newsItem['img_name']); ?>
                         <div class="col-lg-12">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                    <img src="<?=$newsItem['img_url']; ?>" alt="<?= htmlspecialchars($newsItem['title']); ?>">
+<!--                                    <img src="--><?php //=$newsItem['img_url']; ?><!--" alt="--><?php //= htmlspecialchars($newsItem['title']); ?><!--">-->
+                                    <img style="width: 770px; height: 340px" src="<?=$image; ?>" alt="<?=htmlspecialchars($newsItem['title'])?>"
                                 </div>
                                 <div class="down-content">
                                     <span> <?= $newsItem['category_name'] ?> </span>
