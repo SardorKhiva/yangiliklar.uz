@@ -1,4 +1,3 @@
 <?php
-// echo __FILE__;
-
-require_once __DIR__ . '/views/index.php';
+require_once 'config.php';
+require_once 'views/index.php';
