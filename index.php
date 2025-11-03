@@ -1,7 +1,4 @@
 <?php
-// index.php
+// echo __FILE__;
 
-require_once __DIR__ . '/config/CONSTANTS.php';
-
-// views/index ni asosiy index ga qo'shish
-require_once VIEWS_INDEX;
+require_once __DIR__ . '/views/index.php';
