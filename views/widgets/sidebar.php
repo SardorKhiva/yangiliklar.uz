@@ -13,7 +13,8 @@
         <div class="col-lg-12">
             <div class="sidebar-item search">
                 <form id="search_form" name="gs" method="GET" action="#">
-                    <input type="text" name="q" class="searchText" placeholder="qidirish uchun yozing..." autocomplete="on">
+                    <input type="text" name="q" class="searchText" placeholder="qidirish uchun yozing..."
+                           autocomplete="on">
                 </form>
             </div>
         </div>
@@ -24,18 +25,19 @@
                 </div>
                 <div class="content">
                     <ul>
-                        <li><a href="post-details.html">
-                                <h5>Vestibulum id turpis porttitor sapien facilisis scelerisque</h5>
-                                <span>May 31, 2020</span>
-                            </a></li>
-                        <li><a href="post-details.html">
-                                <h5>Suspendisse et metus nec libero ultrices varius eget in risus</h5>
-                                <span>May 28, 2020</span>
-                            </a></li>
-                        <li><a href="post-details.html">
-                                <h5>Swag hella echo park leggings, shaman cornhole ethical coloring</h5>
-                                <span>May 14, 2020</span>
-                            </a></li>
+                        <?php if (!empty($news)): ?>
+                        <?php foreach ($news as $news_item): ?>
+<!--                        --><?php //= dd($news_item); ?>
+                        <li>
+                            <a href="post-details.html">
+                                <h5> <?= $news_item['sarlavha']; ?> </h5>
+                                <span><?= date('d.m.Y  |  H:i', strtotime($news_item['yaratilgan_vaqti'])); ?></span>
+                            </a>
+
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -47,12 +49,13 @@
                 </div>
                 <div class="content">
                     <ul>
-                        <li><a href="#">- Nature Lifestyle</a></li>
-                        <li><a href="#">- Awesome Layouts</a></li>
-                        <li><a href="#">- Creative Ideas</a></li>
-                        <li><a href="#">- Responsive Templates</a></li>
-                        <li><a href="#">- HTML5 / CSS3 Templates</a></li>
-                        <li><a href="#">- Creative &amp; Unique</a></li>
+                        <?php if (!empty($categories)): ?>
+                        <?php foreach ($categories as $category): ?>
+                        <li><a href="#"> <?= $category['name'] ?> </a></li>
+
+                       <?php endforeach; ?>
+                        <?php endif; ?>
+
                     </ul>
                 </div>
             </div>

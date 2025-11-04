@@ -2,6 +2,7 @@
 </div>
 </div>
 </section>
+<!-- tepadagi 4 qator main-contentga oid! -->
 
 <footer>
     <div class="container">

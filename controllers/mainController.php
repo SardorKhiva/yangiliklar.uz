@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../models/mainModel.php';
 $menus = getMenus();
+$categories = getCategories();
 
 if (!empty($_GET) && !empty($_GET['controller'])) {
     $controller = $_GET['controller'];
