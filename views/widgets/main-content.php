@@ -93,6 +93,10 @@
                 </div>
             </div>
             <div class="col-lg-4">
+
+                <!--   sidebar:             -->
+
+                <!--
                 <div class="sidebar">
                     <div class="row">
                         <div class="col-lg-12">
@@ -163,7 +167,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
+
+
+          -->

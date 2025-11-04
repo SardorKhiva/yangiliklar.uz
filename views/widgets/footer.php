@@ -1,3 +1,8 @@
+</div>
+</div>
+</div>
+</section>
+
 <footer>
     <div class="container">
         <div class="row">
@@ -9,7 +14,7 @@
 
                             <li>
                                 <a href="<?= $social['url'] ?>" target="_blank">
-                                    <i class="<?=$social['icon_class'];?>>"></i>
+                                    <i class="<?= $social['icon_class']; ?>>"></i>
                                 </a>
                             </li>
 

@@ -218,7 +218,7 @@ require_once __DIR__ . '/widgets/header.php';
                 <div class="col-lg-12">
                   <div class="sidebar-item categories">
                     <div class="sidebar-heading">
-                      <h2>Categories</h2>
+                      <h2>Kategoriyalar</h2>
                     </div>
                     <div class="content">
                       <ul>
