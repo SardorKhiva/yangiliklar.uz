@@ -4,3 +4,4 @@
 
 require_once __DIR__ . '/menu.php';
 require_once __DIR__ . '/socials.php';
+require_once __DIR__ . '/news.php';
