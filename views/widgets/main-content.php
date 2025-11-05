@@ -29,15 +29,18 @@
                     <div class="row">
                         <?php if (!empty($news)): ?>
                             <?php foreach ($news as $news_item): ?>
-
+                        <?php if (!empty($news_item['sarlavha']) && $news_item['yangilik_matni'] != ' '): ?>
+                                <?php if (!empty($news_item['yangilik_matni']) && $news_item['yangilik_matni'] != " "): ?>
                                 <!--  rasm joylashgan yo'lni dinamik olish  -->
                                 <?php $image = getImage('news', $news_item['news_id'], $news_item['rasm']); ?>
                                 <div class="col-lg-12">
                                     <div class="blog-post">
                                         <div class="blog-thumb">
-                                            <img src="<?= $image; ?>"
+                                           <a href="?controller=news_view&id=<?= htmlspecialchars($news_item['news_id']); ?>">
+                                               <img src="<?= $image; ?>"
                                                  style="height: 269px; width: 610px; object-fit: cover"
                                                  alt="<?= $news_item['sarlavha']; ?> ">
+                                           </a>
                                         </div>
                                         <div class="down-content">
                                             <span> <?= $news_item['kategoriya'] ?></span>
@@ -51,8 +54,9 @@
                                                 <li><a> <i class="fas fa-eye"></i>
                                                         Ko'rildi: <?= $news_item['kurishlar_soni']; ?> </a></li>
                                             </ul>
+                                            <a href="?controller=news_view&id=<?= htmlspecialchars($news_item['news_id']); ?>">
                                             <p> <?= $news_item['qisqa_tavsif'] ?> </p>
-
+                                           </a>
                                             <!--
                                              <div class="post-options">
                                                <div class="row">
@@ -78,6 +82,8 @@
                                     </div>
                                 </div>
 
+                            <?php endif; ?>
+                            <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
 

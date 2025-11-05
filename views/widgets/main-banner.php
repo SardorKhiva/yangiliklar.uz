@@ -6,17 +6,21 @@
 
             <?php if (!empty($banner)): ?>
             <?php foreach ($banner as $item): ?>
+            <?php if (!empty($item['sarlavha']) ): ?>
+
             <!--  rasm joylashgan yo'lni dinamik olish  -->
             <?php $image = getImage('news', $item['news_id'], $item['rasm']); ?>
 <!--                --><?php //dd($item); ?>
           <div class="item">
-            <img src=" <?= $image; ?> " style="height: 426px; width: 493px; " alt="<?= $item['sarlavha']; ?> ">
+            <a href="?controller=news_view&id=<?= $item['news_id'] ?>">
+                <img src=" <?= $image; ?> " style="height: 326px; width: 393px; " alt="<?= $item['sarlavha']; ?> ">
+            </a>
             <div class="item-content">
               <div class="main-content">
                 <div class="meta-category">
                   <span> <?= $item['kategoriya']; ?> </span>
                 </div>
-                <a href="?controller=news_view&id=<?= $item['news_id'] ?>"><h4> <?= $item['sarlavha']; ?> </h4></a>
+                <a href="?controller=news_view&id=<?= htmlspecialchars($item['news_id']); ?>"><h4> <?= $item['sarlavha']; ?> </h4></a>
                 <ul class="post-info">
                   <li><a href="#"> <?= $item['muallif']; ?> </a></li>
                   <li><a href="#"> <?= date('d.m.Y  |  H:i', strtotime($item['yaratilgan_vaqti'])); ?>  </a></li>
@@ -26,6 +30,7 @@
             </div>
           </div>
 
+            <?php endif; ?>
             <?php endforeach; ?>
             <?php endif; ?>
         </div>

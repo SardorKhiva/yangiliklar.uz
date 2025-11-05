@@ -60,3 +60,32 @@ function getBannerNews(): array
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getNewsById(int $id): array
+{
+    global $pdo;
+
+    $sql = "SELECT 
+                `N`.`id` AS `news_id`,
+                `A`.`name` AS `muallif`, 
+                `N`.`title` AS `sarlavha`,
+                `N`.`description` AS `qisqa_tavsif`,
+                `C`.`name` AS `kategoriya`,
+                `N`.`image` AS `rasm`,
+                `N`.`body` AS `yangilik_matni`,
+                `N`.`seen_count` AS `kurishlar_soni`,
+                `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+            FROM `news` AS `N`
+            JOIN `category` AS `C`
+             ON `N`.`category_id` = `C`.`id`
+            JOIN `author` AS `A`
+            ON `N`.`author_id` = `A`.`id`
+            WHERE `N`.`status` = " . ACTIVE .
+        " AND `N`.`id` = :id " .
+        " LIMIT 1 ; ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
