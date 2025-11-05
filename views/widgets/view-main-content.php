@@ -1,13 +1,10 @@
-<?php
-/**
- * Foydalanuvchi: User
- * Loyiha nomi: yangiliklar.uz
- * Fayl nomi: view-main-content.php
- * Fayl yaratilgan: 04.11.2025 16:08
- * Maqsad:
- */
-?>
-
+<!--
+ Foydalanuvchi: User
+ Loyiha nomi: yangiliklar.uz
+ Fayl nomi: view-main-content.php
+ Fayl yaratilgan: 04.11.2025 16:08
+ Maqsad:
+-->
 
 <section class="call-to-action">
     <div class="container">
@@ -39,6 +36,7 @@
             <div class="col-lg-8">
                 <div class="all-blog-posts">
                     <div class="row">
+
                         <div class="col-lg-12">
                             <div class="blog-post">
                                 <div class="blog-thumb">
@@ -90,6 +88,7 @@
                                     </div>
                                 </div>
                             </div>
+<!--                        --><?php //require_once __DIR__ . '/sidebar.php'; ?>
                         </div>
                         <div class="col-lg-12">
                             <div class="sidebar-item comments">
@@ -182,6 +181,7 @@
                                                 <fieldset>
                                                     <button type="submit" id="form-submit" class="main-button">Submit
                                                     </button>
+
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -193,8 +193,11 @@
                 </div>
             </div>
             <div class="col-lg-4">
-
+                <?php require_once __DIR__ . '/sidebar.php'; ?>
             </div>
         </div>
     </div>
+
 </section>
+
+<div class="col-lg-4">

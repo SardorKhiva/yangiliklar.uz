@@ -1,7 +1,14 @@
 </div>
 </div>
+</section>
+
+<!--
+</div>
+</div>
 </div>
 </section>
+-->
+
 <!-- tepadagi 4 qator main-contentga oid! -->
 
 <footer>
@@ -20,6 +27,7 @@
                             </li>
 
                         <?php endforeach; ?>
+
                     <?php endif; ?>
 
                 </ul>

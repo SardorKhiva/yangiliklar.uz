@@ -17,7 +17,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-content">
-                        <h4>Post Details</h4>
+                        <!-- Post Details: -->
+                        <h4>
+<!-- TODO: Shu yerda yangilik mavzusi chiqishi kerak                            -->
+                            Texnologiya
+                        </h4>
+
                         <h2>Single blog post</h2>
                     </div>
                 </div>

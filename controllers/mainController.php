@@ -2,11 +2,13 @@
 
 require_once __DIR__ . '/../models/mainModel.php';
 $menus = getMenus();
+$socials = getSocials();
 $categories = getCategories();
+$news = getLastNews();
+$banner = getBannerNews();
 
 if (!empty($_GET) && !empty($_GET['controller'])) {
     $controller = $_GET['controller'];
-//    die($controller);
 
     switch ($controller) {
         case 'news_view':
@@ -23,8 +25,9 @@ if (!empty($_GET) && !empty($_GET['controller'])) {
 } else {
 
 
-    $socials = getSocials();
-    $news = getLastNews();
+
+//    $news = getLastNews();   // agar shu massivdagi elementlar kerak bo'lsa
+
 
     require_once __DIR__ . '/../views/index.php';
 

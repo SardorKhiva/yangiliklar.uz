@@ -1,13 +1,12 @@
-<?php
-/**
- * Foydalanuvchi: User
- * Loyiha nomi: yangiliklar.uz
- * Fayl nomi: sidebar.php
- * Fayl yaratilgan: 04.11.2025 15:45
- * Maqsad: index va news details sahifalaridagi so'nggi 3 ta post va kategoriyalar turadigan qismi
- */
-?>
+<!--
+  Foydalanuvchi: User
+  Loyiha nomi: yangiliklar.uz
+  Fayl nomi: sidebar.php
+  Fayl yaratilgan: 04.11.2025 15:45
+  Maqsad: index va news details sahifalaridagi so'nggi 3 ta post va kategoriyalar turadigan qismi
+-->
 
+<!-- SIDEBAR O'NG TOMONDA -->
 <div class="sidebar">
     <div class="row">
         <div class="col-lg-12">
@@ -26,18 +25,18 @@
                 <div class="content">
                     <ul>
                         <?php if (!empty($news)): ?>
-                        <?php foreach ($news as $news_item): ?>
-<!--                        --><?php //= dd($news_item); ?>
-                        <li>
-                            <a href="post-details.html">
-                                <h5> <?= $news_item['sarlavha']; ?> </h5>
-                                <span><?= date('d.m.Y  |  H:i', strtotime($news_item['yaratilgan_vaqti'])); ?></span>
-                            </a>
+                            <?php foreach ($news as $news_item): ?>
+                                <!--                        --><?php //= dd($news_item); ?>
+                                <li>
+                                    <a href="?controller=news_view&id=<?= htmlspecialchars($news_item['news_id']) ?>">
+                                        <h5> <?= htmlspecialchars($news_item['sarlavha']); ?> </h5>
+                                        <span><?= date('d.m.Y  |  H:i', strtotime($news_item['yaratilgan_vaqti'])); ?></span>
+                                    </a>
 
+                                </li>
                             <?php endforeach; ?>
-                            <?php endif; ?>
-                        </li>
-
+                        <?php else: echo 'news massivi null!'; ?>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -50,10 +49,10 @@
                 <div class="content">
                     <ul>
                         <?php if (!empty($categories)): ?>
-                        <?php foreach ($categories as $category): ?>
-                        <li><a href="#"> <?= $category['name'] ?> </a></li>
+                            <?php foreach ($categories as $category): ?>
+                                <li><a href="#"> <?= $category['name'] ?> </a></li>
 
-                       <?php endforeach; ?>
+                            <?php endforeach; ?>
                         <?php endif; ?>
 
                     </ul>

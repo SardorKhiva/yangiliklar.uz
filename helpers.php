@@ -24,7 +24,7 @@ function dd(mixed $arr, bool $die = false): void
 }
 
 
-function getImage(string $table_name, int $id, string $filename): string
+function getImage(string $table_name, int $id, mixed $filename): string
 {
     if (empty($filename)) {
         return '/assets/images/no_image.png';
