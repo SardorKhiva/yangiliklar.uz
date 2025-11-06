@@ -89,3 +89,10 @@ function getNewsById(int $id): array
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function getAllNewsIds(): array{
+    global $pdo;
+
+    $stmt = $pdo->query("SELECT `id` FROM `news` ORDER BY `id`");
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
