@@ -27,7 +27,7 @@ function getLastNews(): array
             JOIN `author` AS `A`
             ON `N`.`author_id` = `A`.`id`
             WHERE `N`.`status` = " . ACTIVE .
-            " ORDER BY `yaratilgan_vaqti` DESC
+        " ORDER BY `yaratilgan_vaqti` DESC
             LIMIT 3";
 
     $stmt = $pdo->prepare($sql);
@@ -76,8 +76,8 @@ function getNewsById(int $id): array
                 `N`.`seen_count` AS `kurishlar_soni`,
                 `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
             FROM `news` AS `N`
-            JOIN `category` AS `C`
-             ON `N`.`category_id` = `C`.`id`
+            LEFT JOIN `category` AS `C`
+             ON `N`.`category_id` = `C`.`id` AND `C`.`status` = " . ACTIVE . "
             JOIN `author` AS `A`
             ON `N`.`author_id` = `A`.`id`
             WHERE `N`.`status` = " . ACTIVE .
@@ -90,9 +90,28 @@ function getNewsById(int $id): array
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-function getAllNewsIds(): array{
+
+// barcha yangiliklar id larini olish
+function getAllNewsIds(): array
+{
     global $pdo;
 
     $stmt = $pdo->query("SELECT `id` FROM `news` ORDER BY `id`");
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
+
+function updateCount($id)
+{
+    global $pdo;
+
+    $sql = "UPDATE `news` 
+    SET `seen_count` = `seen_count` + 1 
+    WHERE `id` = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    try {
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        dd($e->getMessage());
+    }
 }

@@ -1,14 +1,3 @@
-<?php
-/**
- * Foydalanuvchi: User
- * Loyiha nomi: yangiliklar.uz
- * Fayl nomi: view-main-banner.php
- * Fayl yaratilgan: 04.11.2025 16:05
- * Maqsad:
- */
-
-?>
-
 <!-- Page Content -->
 <!-- Banner Starts Here -->
 <div class="heading-page header-text">
@@ -17,13 +6,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-content">
-                        <!-- Post Details: -->
                         <h4>
-<!-- TODO: Shu yerda yangilik mavzusi chiqishi kerak                            -->
-                            Texnologiya
+                            <!-- Kategoriya havolasi -->
+                            <a href="?controller=category&cat=<?= urlencode($newsItem['kategoriya']); ?>"
+                               class="category-link">
+                                <?= htmlspecialchars($newsItem['kategoriya']); ?>
+                            </a>
                         </h4>
-
-                        <h2>Single blog post</h2>
+                        <h2> <?= $newsItem['sarlavha']; ?> </h2>
                     </div>
                 </div>
             </div>

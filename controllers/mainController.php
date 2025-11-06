@@ -1,12 +1,14 @@
 <?php
-// yangilik sahifasiga kiradigan bo'ldi, yangilik ni sahifasiga chiqarish qoldi
 declare(strict_types=1);  // tiplarni mixlash
 
 // controllers/mainController.php
 
-// asosiy modelni ulash orqali barcha modellarni ulash:
+// Unreachable statement demasligi uchu shu class ni ishlatamiz
 use JetBrains\PhpStorm\NoReturn;
 
+// #[NoReturn] uchun
+
+// asosiy modelni ulash orqali barcha modellarni ulash:
 require_once __DIR__ . '/../models/mainModel.php';
 
 $menus = getMenus();            // menu dagi elementlar
@@ -14,6 +16,7 @@ $socials = getSocials();        // footer dagi ijtimoiy tarmoqlar
 $categories = getCategories();  // yangiliklar kategoriyalari
 $news = getLastNews();          // oxirgi 3 ta yangilik
 $banner = getBannerNews();      // bannerdagi yangiliklar, standart 6 ta
+$newsItem = null;
 
 if (!empty($_GET['controller'])) {
     $controller = $_GET['controller'];
@@ -21,9 +24,15 @@ if (!empty($_GET['controller'])) {
     switch ($controller) {
         case 'news_view':
         {
-            // nima kelsa ham get so'rovdagi id ni olish
-            $_GET['id'] = htmlspecialchars($_GET['id']);
-            $id = (int)($_GET['id']);
+            /*
+             get so'rovdagi id ni olish
+            $id = htmlspecialchars($_GET['id']);
+            $id = htmlentities($_GET['id']);
+            $id = strip_tags($_GET['id']);
+            $id = html_entity_decode($_GET['id']);
+            */
+            // id ni int ga o'tkazish, agar son bo'lmasa 0 ni olsin
+            $id = (int)($_GET['id'] ?? 0);
 
             // id larni keshlash
             static $all_ids = null;
@@ -31,19 +40,28 @@ if (!empty($_GET['controller'])) {
                 $all_ids = getAllNewsIds();
             }
 
+            // agar id 0 ga teng oyki undan kichik bo'lsa yoki
+            // yangiliklar jadvalida bunday id bo'lmasa
             if ($id <= 0 || !in_array($id, $all_ids, true)) {
-                show404();
+                show404(); // error 404 ga o'tsin
             }
 
-
-            $newsItem = getNewsById($id);
-            if (!$newsItem) {
-                show404();
-            }
             // id orqali yangilikni olish
+            $newsItem = getNewsById($id);
 
-            require_once __DIR__ . '/../views/view.php';
+            // yangilik necha marta ko'rilganini inkrement qilish
+            if (updateCount($id)) {
+                // shundan keyingina yangilik sahifasini ulasin
+                require_once __DIR__ . '/../views/view.php';
+            }
+            // agar id false bo'lsa
+            if (!$newsItem) {
+                show404(); // error 404 ga o'tsin
+            }
 
+
+
+            // keyingi case larga o'tib ketmasin!
             break;
         }
         case
@@ -54,8 +72,7 @@ if (!empty($_GET['controller'])) {
         }
         default:
         {
-            show404();
-            break;
+            show404();  // agar get so'rovda umuman boshqacha case bo'lsa
         }
     }
 } else {

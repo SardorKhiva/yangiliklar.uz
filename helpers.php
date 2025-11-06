@@ -11,6 +11,7 @@
 define('PROJECT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/');
 
 // debug funksiya, massivdan nimalar kelyotganini tekshirish uchun
+#[\JetBrains\PhpStorm\NoReturn]
 function dd(mixed $arr, bool $die = false): void
 {
     echo "<pre>";
