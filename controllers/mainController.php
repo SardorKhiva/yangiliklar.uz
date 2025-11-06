@@ -8,15 +8,8 @@ use JetBrains\PhpStorm\NoReturn;
 
 // #[NoReturn] uchun
 
-// asosiy modelni ulash orqali barcha modellarni ulash:
-require_once __DIR__ . '/../models/mainModel.php';
 
-$menus = getMenus();            // menu dagi elementlar
-$socials = getSocials();        // footer dagi ijtimoiy tarmoqlar
-$categories = getCategories();  // yangiliklar kategoriyalari
-$news = getLastNews();          // oxirgi 3 ta yangilik
-$banner = getBannerNews();      // bannerdagi yangiliklar, standart 6 ta
-$newsItem = null;
+require_once __DIR__ . '/imports.php';
 
 if (!empty($_GET['controller'])) {
     $controller = $_GET['controller'];
@@ -49,27 +42,41 @@ if (!empty($_GET['controller'])) {
             // id orqali yangilikni olish
             $newsItem = getNewsById($id);
 
-            // yangilik necha marta ko'rilganini inkrement qilish
-            if (updateCount($id)) {
-                // shundan keyingina yangilik sahifasini ulasin
+            if (!updateCount($id)) {
+                $_SESSION['error'] = "Ko'rishlar soni o'zgarmadi"; // update qilishda muammo bo'ldi
+            } else {
                 require_once __DIR__ . '/../views/view.php';
             }
+
+            /*
+                        // yangilik necha marta ko'rilganini inkrement qilish
+                        if (updateCount($id)) {
+                            // shundan keyingina yangilik sahifasini ulasin
+                            require_once __DIR__ . '/../views/view.php';
+                        }
+            */
+
             // agar id false bo'lsa
             if (!$newsItem) {
                 show404(); // error 404 ga o'tsin
             }
 
-
-
             // keyingi case larga o'tib ketmasin!
             break;
         }
         case
-        'category':
+        'news_category':
         {
-
+            require_once __DIR__ . '/../views/view.php';
             break;
         }
+
+        case 'all_news':
+        {
+            require_once __DIR__ . '/../views/news.php'; // blog.html
+            break;
+        }
+
         default:
         {
             show404();  // agar get so'rovda umuman boshqacha case bo'lsa

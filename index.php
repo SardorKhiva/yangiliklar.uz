@@ -1,4 +1,4 @@
 <?php
-require_once 'config.php';
-require_once 'helpers.php';
+
+// hamma sir-asror asosiy controllerda:
 require_once __DIR__ . '/controllers/mainController.php';

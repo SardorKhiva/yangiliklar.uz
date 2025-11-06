@@ -59,6 +59,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Yangilik teglari bilan ishlaganda kerak bo'ladi bu div:        -->
+        <!--
         <div class="col-lg-12">
             <div class="sidebar-item tags">
                 <div class="sidebar-heading">
@@ -77,5 +80,7 @@
                 </div>
             </div>
         </div>
+        -->
+
     </div>
 </div>

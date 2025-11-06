@@ -1,11 +1,3 @@
-<!--
- Foydalanuvchi: User
- Loyiha nomi: yangiliklar.uz
- Fayl nomi: view-main-content.php
- Fayl yaratilgan: 04.11.2025 16:08
- Maqsad:
--->
-
 <section class="call-to-action">
     <div class="container">
         <div class="row">

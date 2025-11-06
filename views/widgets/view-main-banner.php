@@ -1,3 +1,5 @@
+<?php /** @var $newsItem - e'lon qilingan */ ?>
+
 <!-- Page Content -->
 <!-- Banner Starts Here -->
 <div class="heading-page header-text">

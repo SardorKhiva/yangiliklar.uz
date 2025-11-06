@@ -1,8 +1,9 @@
+<?php /**@var $newsItem - yangilik massivi */ ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -10,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
           rel="stylesheet">
 
-    <title>Stand CSS Blog by TemplateMo</title>
+    <!-- Yangilik sarlavhasi   -->
+    <title> <?= $newsItem['sarlavha']; ?> </title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,13 +23,6 @@
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
     <link rel="stylesheet" href="assets/css/owl.css">
-    <!--
-
-    TemplateMo 551 Stand Blog
-
-    https://templatemo.com/tm-551-stand-blog
-
-    -->
 </head>
 
 <body>
@@ -44,9 +39,25 @@
 
 <!-- Header -->
 <header class="">
+
+    <?php if (!empty($_SESSION['error'])): ?>
+        <div class="alert alert-danger" id="errorAlert">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <!-- 3 soniyadan keyin o'chadigan JS alert   -->
+        <script>
+            setTimeout(() => {
+                document.getElementById('errorAlert').remove();
+            }, 3000);
+        </script>
+        <?php unset($_SESSION['error']); endif; ?>
+
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><h2>Stand Blog<em>.</em></h2></a>
+            <a class="navbar-brand" href="/">
+                <!-- TODO: Sayt nomi shu yerda turadi                -->
+                <h2> <?= SITE_NAME ?? 'Sayt nomi'; ?> <em>.</em></h2>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
