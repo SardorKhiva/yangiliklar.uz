@@ -5,13 +5,12 @@
                 <div class="main-content">
                     <div class="row">
                         <div class="col-lg-8">
-                            <span>Stand Blog HTML5 Template</span>
-                            <h4>Creative HTML Template For Bloggers!</h4>
+                            <span><?= SITE_NAME ?? 'Bu yerda sayt nomi' ?></span>
+                            <h4> <?= SLOGAN ?> </h4>
                         </div>
                         <div class="col-lg-4">
                             <div class="main-button">
-                                <a rel="nofollow" href="https://templatemo.com/tm-551-stand-blog" target="_parent">Download
-                                    Now!</a>
+                                <a href="https://t.me/settings" target="_parent">Menga Telegramdan yozing!</a>
                             </div>
                         </div>
                     </div>
@@ -29,8 +28,7 @@
                     <div class="row">
                         <?php if (!empty($news)): ?>
                             <?php foreach ($news as $news_item): ?>
-                                <?php if (!empty($news_item['sarlavha']) && $news_item['yangilik_matni'] != ' '): ?>
-                                    <?php if (!empty($news_item['yangilik_matni']) && $news_item['yangilik_matni'] != " "): ?>
+                                <?php if (!empty($news_item['sarlavha']) ): ?>
                                         <!--  rasm joylashgan yo'lni dinamik olish  -->
                                         <?php $image = getImage('news', $news_item['news_id'], $news_item['rasm']); ?>
                                         <div class="col-lg-12">
@@ -82,7 +80,6 @@
                                             </div>
                                         </div>
 
-                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>

@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <span><?= SITE_NAME ?? 'Bu yerda sayt nomi' ?></span>
-                            <h4>Eng qiziqarli yangiliklar bizda!</h4>
+                            <h4> <?= SLOGAN ?> </h4>
                         </div>
                         <div class="col-lg-4">
                             <div class="main-button">
@@ -27,37 +27,52 @@
             <div class="col-lg-8">
                 <div class="all-blog-posts">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="blog-post">
-                                <div class="blog-thumb">
-                                    <img src="assets/images/blog-thumb-01.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <span>Lifestyle</span>
-                                    <a href="post-details.html">
-                                        <h4>Donec tincidunt leo</h4>
-                                    </a>
-                                    <ul class="post-info">
-                                        <li><a href="#">Admin</a></li>
-                                        <li><a href="#">May 31, 2020</a></li>
-                                        <li><a href="#">12 Comments</a></li>
-                                    </ul>
-                                    <p>Nullam nibh mi, tincidunt sed sapien ut, rutrum hendrerit velit. Integer auctor a
-                                        mauris sit amet eleifend.</p>
-                                    <div class="post-options">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <ul class="post-tags">
-                                                    <li><i class="fa fa-tags"></i></li>
-                                                    <li><a href="#">Best Templates</a>,</li>
-                                                    <li><a href="#">TemplateMo</a></li>
-                                                </ul>
+
+                        <?php if (!empty($ommabopYangiliklar)): ?>
+                            <?php foreach ($ommabopYangiliklar as $ommabopYangilik): ?>
+<!--                                --><?php //dd($ommabopYangilik); ?>
+
+                                <div class="col-lg-6">
+                                    <div class="blog-post">
+                                        <div class="blog-thumb">
+                                            <?php $image = getImage('news', $ommabopYangilik['news_id'], $ommabopYangilik['rasm']); ?>
+                                            <img src="<?= $image; ?>" alt="">
+                                        </div>
+                                        <div class="down-content">
+                                            <span> <?= $ommabopYangilik['kategoriya']; ?> </span>
+                                            <a href="post-details.html">
+                                                <h4><?= $ommabopYangilik['sarlavha']; ?> </h4>
+                                            </a>
+                                            <ul class="post-info">
+                                                <li><a href="#"> <?= $ommabopYangilik['muallif']; ?> </a></li>
+                                                <li>
+                                                    <a> <?= date('d.m.Y  |  H:i', strtotime($ommabopYangilik['yaratilgan_vaqti'])); ?> </a>
+                                                </li>
+                                                <li><a> <i class="fas fa-eye"></i>
+                                                        Ko'rildi: <?= $ommabopYangilik['kurishlar_soni']; ?> </a></li>
+                                            </ul>
+                                            <a href="?controller=news_view&id=<?= htmlspecialchars($ommabopYangilik['news_id']); ?>">
+                                                <p> <?= $ommabopYangilik['qisqa_tavsif'] ?> </p>
+                                            </a>
+                                            <div class="post-options">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-tags"></i></li>
+                                                            <li><a href="#">Best Templates</a>,</li>
+                                                            <li><a href="#">TemplateMo</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <!--
                         <div class="col-lg-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
@@ -213,6 +228,8 @@
                                 </div>
                             </div>
                         </div>
+                        -->
+
                         <div class="col-lg-12">
                             <ul class="page-numbers">
                                 <li><a href="#">1</a></li>

@@ -22,7 +22,7 @@ function getLastNews(): array
                 `N`.`description` AS `qisqa_tavsif`,
                 `C`.`name` AS `kategoriya`,
                 `N`.`image` AS `rasm`,
-                `N`.`body` AS `yangilik_matni`,
+               -- `N`.`body` AS `yangilik_matni`,
                 `N`.`seen_count` AS `kurishlar_soni`,
                 `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
             FROM `news` AS `N`
@@ -168,6 +168,43 @@ function updateCount($id)
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     try {
         return $stmt->execute();
+    } catch (PDOException $e) {
+        dd($e->getMessage());
+    }
+}
+
+
+/**
+ * @return array
+ * eng ko'p ko'rilgan yangiliklarni 6 tadan chiqarish
+ */
+function popularNews(): array
+{
+    global $pdo;
+
+    $sql = "SELECT 
+                `N`.`id` AS `news_id`,
+                `A`.`name` AS `muallif`, 
+                `N`.`title` AS `sarlavha`,
+                `N`.`description` AS `qisqa_tavsif`,
+                `C`.`name` AS `kategoriya`,
+                `N`.`image` AS `rasm`,
+               -- `N`.`body` AS `yangilik_matni`,
+                `N`.`seen_count` AS `kurishlar_soni`,
+                `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+            FROM `news` AS `N`
+            JOIN `category` AS `C`
+             ON `N`.`category_id` = `C`.`id`
+            JOIN `author` AS `A`
+            ON `N`.`author_id` = `A`.`id`
+            WHERE `N`.`status` = " . ACTIVE .
+        " ORDER BY `seen_count` DESC
+            LIMIT 6";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    try {
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         dd($e->getMessage());
     }

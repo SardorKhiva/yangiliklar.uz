@@ -16,4 +16,5 @@ $categories = getCategories();  // yangiliklar kategoriyalari
 $news = getLastNews();          // oxirgi 3 ta yangilik
 $allNews = getAllNews();        // barcha yangiliklar
 $banner = getBannerNews();      // bannerdagi yangiliklar, standart 6 ta
+$ommabopYangiliklar = popularNews();  // eng ko'p ko'rilgan yangiliklar 6 tadan
 

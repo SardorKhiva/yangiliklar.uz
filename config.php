@@ -5,7 +5,8 @@ const USER_NAME = 'root';
 const PASSWORD = '1302';
 const ACTIVE = 1;
 
-define('SITE_NAME', 'Yangiliklar.uz');
+define('SITE_NAME', 'Yangiliklar.uz');                      // sayt nomi
+define('SLOGAN', "Eng qiziqarli yangiliklar bizda!");       // sayt shiori
 
 const SQLITE_DB_PATH = __DIR__. '/db/sqlite.sqlite3';  // SQLite baza yo'li 
 

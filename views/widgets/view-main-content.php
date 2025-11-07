@@ -5,13 +5,12 @@
                 <div class="main-content">
                     <div class="row">
                         <div class="col-lg-8">
-                            <span>Stand Blog HTML5 Template</span>
-                            <h4>Creative HTML Template For Bloggers!</h4>
+                            <span><?= SITE_NAME ?? 'Bu yerda sayt nomi' ?></span>
+                            <h4> <?= SLOGAN ?> </h4>
                         </div>
                         <div class="col-lg-4">
                             <div class="main-button">
-                                <a rel="nofollow" href="https://templatemo.com/tm-551-stand-blog" target="_parent">Download
-                                    Now!</a>
+                                <a href="https://t.me/settings" target="_parent">Menga Telegramdan yozing!</a>
                             </div>
                         </div>
                     </div>
@@ -151,14 +150,13 @@
                                                 <fieldset>
                                                     <input name="name" type="text" id="name"
                                                            placeholder="Ism"
-                                                           required="">
+                                                           required>
                                                 </fieldset>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <fieldset>
                                                     <input name="email" type="text" id="email"
-                                                           placeholder="Elektron pochta"
-                                                           required="">
+                                                           placeholder="Elektron pochta">
                                                 </fieldset>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
@@ -170,14 +168,13 @@
                                             <div class="col-lg-12">
                                                 <fieldset>
                                                     <textarea name="message" rows="6" id="message"
-                                                              placeholder="Izoh" required=""></textarea>
+                                                              placeholder="Izoh" required></textarea>
                                                 </fieldset>
                                             </div>
                                             <div class="col-lg-12">
                                                 <fieldset>
                                                     <button type="submit" id="form-submit" class="main-button">Yuborish
                                                     </button>
-
                                                 </fieldset>
                                             </div>
                                         </div>
