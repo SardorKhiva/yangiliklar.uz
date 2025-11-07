@@ -1,4 +1,6 @@
-<?php /**@var $newsItem - yangilik massivi */ ?>
+<?php /**@var $newsItem - yangilik massivi */
+//dd($newsItem, 0);
+?>
 
 <!DOCTYPE html>
 <html lang="uz">
@@ -11,8 +13,21 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
           rel="stylesheet">
 
-    <!-- Yangilik sarlavhasi   -->
-    <title> <?= $newsItem['sarlavha']; ?> </title>
+    <!-- Dinamik title   -->
+    <?php
+    $currentPage = basename($_SERVER['PHP_SELF']); // index.php, news.php va h.k.
+
+    if (!empty($newsItem)) {
+        $pageTitle = htmlspecialchars($newsItem['sarlavha'], ENT_QUOTES, 'UTF-8');
+    } elseif ($currentPage === 'index.php') {
+        $pageTitle = SITE_NAME . ' - ' . 'Asosiy sahifa';  // SEO uchun index sahifada sayt nomi oldinda turadi
+    } elseif (!empty($allNews)) {
+        $pageTitle = 'Barcha yangiliklar - ' . SITE_NAME;  // sayt nomi ham turaqolsin
+    } else {
+        $pageTitle = 'Asosiy sahifa';
+    }
+    ?>
+    <title><?= $pageTitle ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

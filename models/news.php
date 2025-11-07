@@ -7,6 +7,10 @@
  * Maqsad: yangiliklar bilan ishlovchi model
  */
 
+/**
+ * @return array
+ * oxirgi 3 ta yangilikni oluvchi funksiya
+ */
 function getLastNews(): array
 {
     global $pdo;
@@ -35,6 +39,46 @@ function getLastNews(): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * @return array
+ * bsrcha yangiliklarni oluvchi funksiya
+ */
+function getAllNews(): array
+{
+    global $pdo;
+
+    $sql = "SELECT 
+                `N`.`id` AS `news_id`,
+                `A`.`name` AS `muallif`, 
+                `N`.`title` AS `sarlavha`,
+                `N`.`description` AS `qisqa_tavsif`,
+                `C`.`name` AS `kategoriya`,
+                `N`.`image` AS `rasm`,
+                `N`.`body` AS `yangilik_matni`,
+                `N`.`seen_count` AS `kurishlar_soni`,
+                `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+            FROM `news` AS `N`
+            JOIN `category` AS `C`
+             ON `N`.`category_id` = `C`.`id`
+            JOIN `author` AS `A`
+            ON `N`.`author_id` = `A`.`id`
+            WHERE `N`.`status` = " . ACTIVE .
+        " ORDER BY `yaratilgan_vaqti` DESC
+            ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    try {
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        dd($e->getMessage());
+    }
+}
+
+/**
+ * @return array
+ * bannerda turuvchi yangiliklarni oluvchi funksiya
+ */
 function getBannerNews(): array
 {
     global $pdo;
@@ -61,6 +105,11 @@ function getBannerNews(): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * @param int $id
+ * @return array
+ * id bo'yicha yangiliklarni oluvchi funksiya
+ */
 function getNewsById(int $id): array
 {
     global $pdo;
@@ -91,7 +140,10 @@ function getNewsById(int $id): array
 }
 
 
-// barcha yangiliklar id larini olish
+/**
+ * @return array
+ * barcha yangiliklar id larini oluvchi funksiya
+ */
 function getAllNewsIds(): array
 {
     global $pdo;
@@ -100,6 +152,11 @@ function getAllNewsIds(): array
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
+/**
+ * @param $id
+ * @return bool|void
+ * @val seen_count - ko'rishlar sonini increment qiluvchi fuksiya
+ */
 function updateCount($id)
 {
     global $pdo;

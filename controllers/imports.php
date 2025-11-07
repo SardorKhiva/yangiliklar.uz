@@ -14,5 +14,6 @@ $menus = getMenus();            // menu dagi elementlar
 $socials = getSocials();        // footer dagi ijtimoiy tarmoqlar
 $categories = getCategories();  // yangiliklar kategoriyalari
 $news = getLastNews();          // oxirgi 3 ta yangilik
+$allNews = getAllNews();        // barcha yangiliklar
 $banner = getBannerNews();      // bannerdagi yangiliklar, standart 6 ta
 
