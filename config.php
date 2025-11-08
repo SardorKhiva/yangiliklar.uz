@@ -13,6 +13,8 @@ const ADDRESS = "99H6+32Q, Unnamed Rd, Xiva, Xorazm Viloyati, O'zbekiston";
 
 const SQLITE_DB_PATH = __DIR__ . '/db/sqlite.sqlite3';  // SQLite baza yo'li
 
+
+
 try {
     $pdo = new PDO('sqlite:' . SQLITE_DB_PATH);
 //    echo 'SQLite bazaga ulandi!' . "<br>";

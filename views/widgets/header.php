@@ -69,7 +69,9 @@
         <div class="alert alert-danger" id="errorAlert">
             <?= $_SESSION['error']; ?>
         </div>
-        <!-- 3 soniyadan keyin o'chadigan JS alert   -->
+
+        <?php // 3 soniyadan keyin o'chadigan JS alert   ?>
+
         <script>
             setTimeout(() => {
                 document.getElementById('errorAlert').remove();
@@ -80,7 +82,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <!-- TODO: Sayt nomi shu yerda turadi                -->
+                <?php // TODO: Sayt nomi shu yerda turadi                ?>
                 <h2> <?= SITE_NAME ?? 'Sayt nomi'; ?> <em>.</em></h2>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"

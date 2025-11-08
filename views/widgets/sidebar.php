@@ -1,10 +1,9 @@
-<!--
-  Foydalanuvchi: User
+<?php /*
   Loyiha nomi: yangiliklar.uz
   Fayl nomi: sidebar.php
   Fayl yaratilgan: 04.11.2025 15:45
   Maqsad: index va news details sahifalaridagi so'nggi 3 ta post va kategoriyalar turadigan qismi
--->
+*/ ?>
 
 <!-- SIDEBAR O'NG TOMONDA -->
 <div class="sidebar">
@@ -60,8 +59,8 @@
             </div>
         </div>
 
-        <!-- Yangilik teglari bilan ishlaganda kerak bo'ladi bu div:        -->
-        <!--
+        <?php /* Yangilik teglari bilan ishlaganda kerak bo'ladi bu div:
+
         <div class="col-lg-12">
             <div class="sidebar-item tags">
                 <div class="sidebar-heading">
@@ -80,7 +79,7 @@
                 </div>
             </div>
         </div>
-        -->
+        */ ?>
 
     </div>
 </div>

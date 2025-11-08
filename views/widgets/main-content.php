@@ -55,7 +55,10 @@
                                                     <a href="?news.php&controller=news_view&id=<?= htmlspecialchars($news_item['news_id']); ?>">
                                                         <p> <?= $news_item['qisqa_tavsif'] ?> </p>
                                                     </a>
-                                                    <!--
+
+                                                    <?php
+                                                    /*
+
                                                      <div class="post-options">
                                                        <div class="row">
                                                          <div class="col-6">
@@ -74,7 +77,7 @@
                                                          </div>
                                                        </div>
                                                      </div>
-                                                    -->
+                                                    */ ?>
 
                                                 </div>
                                             </div>
