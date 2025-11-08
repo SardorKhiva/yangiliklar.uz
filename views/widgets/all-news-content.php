@@ -30,7 +30,6 @@
 
                         <?php if (!empty($ommabopYangiliklar)): ?>
                             <?php foreach ($ommabopYangiliklar as $ommabopYangilik): ?>
-<!--                                --><?php //dd($ommabopYangilik); ?>
 
                                 <div class="col-lg-6">
                                     <div class="blog-post">
@@ -40,7 +39,7 @@
                                         </div>
                                         <div class="down-content">
                                             <span> <?= $ommabopYangilik['kategoriya']; ?> </span>
-                                            <a href="post-details.html">
+                                            <a href="?controller=news_view&id=<?= $ommabopYangilik['news_id'] ?>">
                                                 <h4><?= $ommabopYangilik['sarlavha']; ?> </h4>
                                             </a>
                                             <ul class="post-info">
@@ -244,12 +243,11 @@
             <div class="col-lg-4">
                 <div class="sidebar">
                     <div class="row">
-
+                        <?php require_once __DIR__ . '/sidebar.php'; ?>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <?php require_once __DIR__ . '/sidebar.php'; ?>
-                </div>
+
+
             </div>
         </div>
     </div>

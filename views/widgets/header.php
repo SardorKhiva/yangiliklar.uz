@@ -82,9 +82,10 @@
 
                     <?php if (!empty($menus)): ?>
                         <?php foreach ($menus as $menu): ?>
+<!--                            --><?php //dd($menu); ?>
 
                             <li class="nav-item"> <!-- sariq rangli qilish uchun active classi kerak -->
-                                <a class="nav-link" href="<?= $menu['url']; ?>">
+                                <a class="nav-link" href="<?= $menu['url']; ?> ">
                                     <?= $menu['name']; ?>
                                     <span class="sr-only">(current)</span>
                                 </a>

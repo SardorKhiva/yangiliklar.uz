@@ -52,7 +52,7 @@
                                                         <li><a> <i class="fas fa-eye"></i>
                                                                 Ko'rildi: <?= $news_item['kurishlar_soni']; ?> </a></li>
                                                     </ul>
-                                                    <a href="?controller=news_view&id=<?= htmlspecialchars($news_item['news_id']); ?>">
+                                                    <a href="?news.php&controller=news_view&id=<?= htmlspecialchars($news_item['news_id']); ?>">
                                                         <p> <?= $news_item['qisqa_tavsif'] ?> </p>
                                                     </a>
                                                     <!--
