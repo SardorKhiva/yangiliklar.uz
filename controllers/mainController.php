@@ -71,9 +71,21 @@ if (!empty($_GET['controller'])) {
             break;
         }
 
-        case 'all_news':
+        case 'all_news':        // barcha yangiliklar sahifasi
         {
             require_once __DIR__ . '/../views/news.php'; // blog.html
+            break;
+        }
+
+        case 'about':           // biz haqimizda sahifasi
+        {
+            require_once __DIR__ . '/../views/about.php';
+            break;
+        }
+
+        case 'contact':         // biz bilan bog'lanish sahifasi
+        {
+            require_once __DIR__ . '/../views/contact.php';
             break;
         }
 

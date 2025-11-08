@@ -7,5 +7,4 @@ require_once __DIR__ . '/../controllers/imports.php';
 require_once __DIR__ . '/../views/widgets/header.php';
 require_once __DIR__ . '/../views/widgets/all-news-banner.php';
 require_once __DIR__ . '/../views/widgets/all-news-content.php';
-//require_once __DIR__ . '/../views/widgets/sidebar.php';
 require_once __DIR__ . '/../views/widgets/footer.php';

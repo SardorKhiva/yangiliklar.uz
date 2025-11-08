@@ -34,9 +34,10 @@
             </div>
             <div class="col-lg-12">
                 <div class="copyright-text">~
-                    <p>Copyright 2020 Stand Blog Co.
+                    <p><?= SLOGAN ?>
 
-                        | Design: <a rel="nofollow" href="https://templatemo.com" target="_parent">TemplateMo</a></p>
+                        | Dizayn: <a rel="nofollow" href="https://t.me/settings" target="_parent"> <?= SITE_NAME ?> </a>
+                    </p>
                 </div>
             </div>
         </div>
