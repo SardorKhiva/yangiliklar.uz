@@ -1,5 +1,8 @@
-<?php /**@var $newsItem - yangilik massivi */
-//dd($newsItem, 0);
+<?php
+/**
+ * @var $newsItem - yangilik massivi
+ * @var $menus - menudagi barcha ma'lumotlar, nomi va sahifa sarlavhasi ham
+ */
 ?>
 
 <!DOCTYPE html>
@@ -13,25 +16,32 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
           rel="stylesheet">
 
-    <!-- Dinamik title   -->
+    <!-- Dinamik title $menus massivida menu ma'lumotlari bor, sahifa sarlavhasi ham dinamik o'zgaradi  -->
     <?php
-    $currentPage = basename($_SERVER['PHP_SELF']); // index.php, news.php va h.k.
+    $currentPage = basename($_SERVER['PHP_SELF']);
 
-    if (!empty($newsItem)) {
-        $pageTitle = htmlspecialchars($newsItem['sarlavha'], ENT_QUOTES, 'UTF-8');
-    } elseif ($currentPage === 'index.php') {
-        $pageTitle = SITE_NAME . ' - ' . 'Asosiy sahifa';  // SEO uchun index sahifada sayt nomi oldinda turadi
-    } elseif (!empty($allNews)) {
-        $pageTitle = 'Barcha yangiliklar - ' . SITE_NAME;  // sayt nomi ham turaqolsin
+    if ($_GET['controller'] !== 'news_view') {
+//    if (($_SERVER['REQUEST_URI']) === '/') {  // 1-usulda index sahifani olish
+        if (($_GET['controller']) === NULL) {     // 2-usulda
+            $currentPage = SITE_NAME . ' - ' . $menus[0]['name'];
+        } elseif ($_GET['controller'] === 'about') {
+            $currentPage = SITE_NAME . ' - ' . $menus[1]['name']; // 'Biz haqimizda';
+        } elseif ($_GET['controller'] === 'all_news') {
+            $currentPage = SITE_NAME . ' - ' . $menus[2]['name'];
+        } elseif ($_GET['controller'] === 'contact') {
+            $currentPage = SITE_NAME . ' - ' . $menus[3]['name'];
+        }
     } else {
-        $pageTitle = 'Asosiy sahifa';
+        if (!empty($newsItem)) {
+            $currentPage = htmlspecialchars($newsItem['sarlavha'], ENT_QUOTES, 'UTF-8');
+        }
     }
+
     ?>
-    <title><?= $pageTitle ?></title>
+    <title><?= $currentPage ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -82,10 +92,9 @@
 
                     <?php if (!empty($menus)): ?>
                         <?php foreach ($menus as $menu): ?>
-<!--                            --><?php //dd($menu); ?>
 
                             <li class="nav-item"> <!-- sariq rangli qilish uchun active classi kerak -->
-                                <a class="nav-link" href="<?= $menu['url']; ?> ">
+                                <a class="nav-link" href="<?= $menu['url']; ?>">
                                     <?= $menu['name']; ?>
                                     <span class="sr-only">(current)</span>
                                 </a>
