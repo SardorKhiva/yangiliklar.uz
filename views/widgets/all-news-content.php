@@ -35,7 +35,9 @@
                                     <div class="blog-post">
                                         <div class="blog-thumb">
                                             <?php $image = getImage('news', $ommabopYangilik['news_id'], $ommabopYangilik['rasm']); ?>
-                                            <img src="<?= $image; ?>" alt="">
+                                            <a href="?controller=news_view&id=<?= $ommabopYangilik['news_id'] ?>">
+                                                <img src="<?= $image; ?>" alt="<?= $ommabopYangilik['sarlavha'] ?>">
+                                            </a>
                                         </div>
                                         <div class="down-content">
                                             <span> <?= $ommabopYangilik['kategoriya']; ?> </span>
