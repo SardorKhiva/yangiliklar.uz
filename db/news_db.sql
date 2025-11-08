@@ -1,7 +1,7 @@
 --  Sayt yangiliklari saqlaydigan baza jadvali tuzilishi
 --  va ma'lumotlari
 
-DROP TABLE IF EXISTS `news`;
+-- DROP TABLE IF EXISTS `news`;
 
 CREATE TABLE IF NOT EXISTS `news`
 (
@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS `news`
     `image`       TEXT    DEFAULT NULL,
     `body`        TEXT    DEFAULT NULL,
     `seen_count`  INTEGER DEFAULT 0 CHECK (seen_count >= 0),
-    `created_at`  TEXT    DEFAULT (datetime('now', '+5 hours')), -- sqlite da datetime turi yo'q
-    `updated_at`  TEXT    DEFAULT (datetime('now', '+5 hours')),
+    `created_at`  TEXT    DEFAULT (datetime('now')), -- sqlite da datetime turi yo'q
+    `updated_at`  TEXT    DEFAULT (datetime('now')),
     `status`      INTEGER DEFAULT 1 CHECK (status IN (0, 1))    -- 0=nofaol, 1=faol
 
 );

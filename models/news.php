@@ -24,7 +24,8 @@ function getLastNews(): array
                 `N`.`image` AS `rasm`,
                -- `N`.`body` AS `yangilik_matni`,
                 `N`.`seen_count` AS `kurishlar_soni`,
-                `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+                DATETIME(`N`.`created_at`, 'localtime') AS `yaratilgan_vaqti`  -- device localtime da vaqtni ko'rsatish
+                -- `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
             FROM `news` AS `N`
             JOIN `category` AS `C`
              ON `N`.`category_id` = `C`.`id`
@@ -56,7 +57,8 @@ function getAllNews(): array
                 `N`.`image` AS `rasm`,
                 `N`.`body` AS `yangilik_matni`,
                 `N`.`seen_count` AS `kurishlar_soni`,
-                `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+                DATETIME(`N`.`created_at`, 'localtime') AS `yaratilgan_vaqti`  -- device localtime da vaqtni ko'rsatish
+                -- `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
             FROM `news` AS `N`
             JOIN `category` AS `C`
              ON `N`.`category_id` = `C`.`id`
@@ -90,7 +92,8 @@ function getBannerNews(): array
                 `C`.`name` AS `kategoriya`,
                 `N`.`image` AS `rasm`,
                 `N`.`seen_count` AS `kurishlar_soni`,
-                DATETIME(`N`.`created_at`, '+5 hours') AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+                DATETIME(`N`.`created_at`, 'localtime') AS `yaratilgan_vaqti`  -- device localtime da vaqtni ko'rsatish
+                -- DATETIME(`N`.`created_at`, '+5 hours') AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
             FROM `news` AS `N`
             JOIN `category` AS `C`
              ON `N`.`category_id` = `C`.`id`
@@ -123,7 +126,7 @@ function getNewsById(int $id): array
                 `N`.`image` AS `rasm`,
                 `N`.`body` AS `yangilik_matni`,
                 `N`.`seen_count` AS `kurishlar_soni`,
-                `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+                DATETIME(`N`.`created_at`, 'localtime') AS `yaratilgan_vaqti`  -- device localtime da vaqtni ko'rsatish
             FROM `news` AS `N`
             LEFT JOIN `category` AS `C`
              ON `N`.`category_id` = `C`.`id` AND `C`.`status` = " . ACTIVE . "
@@ -191,7 +194,8 @@ function popularNews(): array
                 `N`.`image` AS `rasm`,
                -- `N`.`body` AS `yangilik_matni`,
                 `N`.`seen_count` AS `kurishlar_soni`,
-                `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
+                DATETIME(`N`.`created_at`, 'localtime') AS `yaratilgan_vaqti`  -- device localtime da vaqtni ko'rsatish 
+               -- , `N`.`created_at` AS `yaratilgan_vaqti`      -- GMT+5 da ko'rsatish
             FROM `news` AS `N`
             JOIN `category` AS `C`
              ON `N`.`category_id` = `C`.`id`
