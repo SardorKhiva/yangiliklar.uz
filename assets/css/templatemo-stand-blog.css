@@ -405,7 +405,16 @@ header .navbar {
 	margin-bottom: 30px;
 }
 
-.blog-posts .blog-thumb img {
+/* uzm yozg'on stil */
+.blog-thumb img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+.blog-posts /* .blog-thumb img */ {
 	width: 100%;
 	overflow: hidden;
 }
