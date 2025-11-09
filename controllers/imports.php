@@ -16,5 +16,11 @@ $categories = getCategories();  // yangiliklar kategoriyalari
 $news = getLastNews();          // oxirgi 3 ta yangilik
 $allNews = getAllNews();        // barcha yangiliklar
 $banner = getBannerNews();      // bannerdagi yangiliklar, standart 6 ta
-$ommabopYangiliklar = popularNews();  // eng ko'p ko'rilgan yangiliklar 6 tadan
 
+// Pagination uchun
+$currentPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$paginationData = getPaginatedPopularNews($currentPage, 6);
+$ommabopYangiliklar = $paginationData['news'];    // yangiliklar
+$totalPages = (int)$paginationData['totalPages']; // jami sahifalar (int ga cast)
+$currentPage = (int)$paginationData['currentPage']; // joriy sahifa (int ga cast)
+$totalNews = (int)$paginationData['totalNews'];   // jami yangiliklar soni (int ga cast)

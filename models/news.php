@@ -213,3 +213,58 @@ function popularNews(): array
         dd($e->getMessage());
     }
 }
+
+/**
+ * @param int $page - joriy sahifa
+ * @param int $perPage - har sahifada nechta yangilik
+ * @return array - yangiliklar va pagination ma'lumotlari
+ * Sahifalangan ommabop yangiliklar
+ */
+function getpaginatedPopularNews(int $page = 1, int $perPage = 6): array
+{
+    global $pdo;
+
+    $page = max(1, $page);  // kamida 1 bo'lishi kerak
+    $offset = ($page - 1) * $perPage;
+
+    //    umumiy yangiliklar sonini olish
+    $countQuery = "SELECT COUNT(*) AS `total` FROM `news` WHERE status = " . ACTIVE;
+    $countStmt = $pdo->prepare($countQuery);
+    $countStmt->execute();
+    $totalNews = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+    $totalPages = (int)ceil($totalNews / $perPage);
+
+    // Sahifalangan yangiliklar
+    $sql = "
+            SELECT
+                `N`.`id` AS `news_id`,
+                `A`.`name` AS `muallif`,
+                `N`.`title` AS `sarlavha`,
+                `N`.`description` AS `qisqa_tavsif`,
+                `C`.`name` AS `kategoriya`,
+                `N`.`image` AS `rasm`,
+                `N`.`seen_count` AS `kurishlar_soni`,
+                DATETIME(`N`.`created_at`, 'localtime') AS `yaratilgan_vaqti`
+                FROM `news` AS `N`
+            JOIN `category` AS `C`
+            ON `N`.`category_id` = `C`.`id`
+            JOIN `author` AS `A`
+            ON `N`.`author_id` = `A`.`id`
+            WHERE `N`.`status` = " . ACTIVE . "
+            ORDER BY `seen_count` DESC
+            LIMIT :limit OFFSET :offset;
+    ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return [
+        'news' => $stmt->fetchAll(PDO::FETCH_ASSOC),
+        'currentPage' => $page,
+        'totalPages' => $totalPages,
+        'totalNews' => $totalNews,
+        'perPage' => $perPage
+        ];
+}

@@ -5,7 +5,8 @@
                 <div class="main-content">
                     <div class="row">
                         <div class="col-lg-8">
-                            <span><?= SITE_NAME ?? 'Bu yerda sayt nomi' ?></span>
+                            <?php // SITE_NAME - const, sayt nomi; SLOGAN - const, sayt shiori?>
+                            <span><?= SITE_NAME ?></span>
                             <h4> <?= SLOGAN ?> </h4>
                         </div>
                         <div class="col-lg-4">
@@ -71,16 +72,70 @@
                                 </div>
 
                             <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="col-lg-12">
+                                <p>Hozircha yangiliklar yo'q.</p>
+                            </div>
                         <?php endif; ?>
 
 
                         <div class="col-lg-12">
-                            <ul class="page-numbers">
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
+                            <?php if (isset($totalPages) && $totalPages > 1):
+                                $controller = $_GET['controller'] ?? '';
+                                $baseUrl = $controller ? "?controller=$controller" : '?';
+                                // Int ga cast qilish
+                                $currentPageInt = (int)$currentPage;
+                                $totalPagesInt = (int)$totalPages;
+                                ?>
+                                <ul class="page-numbers">
+                                    <!-- Oldingi sahifa tugmasi -->
+                                    <?php if ($currentPageInt > 1): ?>
+                                        <li>
+                                            <a href="<?= $baseUrl ?>&page=<?= ($currentPageInt - 1) ?>">
+                                                <i class="fa fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php
+                                    // Ko'p sahifalar bo'lsa, faqat keraklilarini ko'rsatish
+                                    $start = max(1, $currentPageInt - 2);
+                                    $end = min($totalPagesInt, $currentPageInt + 2);
+
+                                    // Birinchi sahifa
+                                    if ($start > 1): ?>
+                                        <li><a href="<?= $baseUrl ?>&page=1">1</a></li>
+                                        <?php if ($start > 2): ?>
+                                            <li class="disabled"><span>...</span></li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
+                                    <!-- Asosiy sahifalar -->
+                                    <?php for ($i = $start; $i <= $end; $i++): ?>
+                                        <li <?= $i == $currentPageInt ? 'class="active"' : '' ?>>
+                                            <a href="<?= $baseUrl ?>&page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                    <?php endfor; ?>
+
+                                    <?php
+                                    // Oxirgi sahifa
+                                    if ($end < $totalPagesInt): ?>
+                                        <?php if ($end < $totalPagesInt - 1): ?>
+                                            <li class="disabled"><span>...</span></li>
+                                        <?php endif; ?>
+                                        <li><a href="<?= $baseUrl ?>&page=<?= $totalPagesInt ?>"><?= $totalPagesInt ?></a></li>
+                                    <?php endif; ?>
+
+                                    <!-- Keyingi sahifa tugmasi -->
+                                    <?php if ($currentPageInt < $totalPagesInt): ?>
+                                        <li>
+                                            <a href="<?= $baseUrl ?>&page=<?= ($currentPageInt + 1) ?>">
+                                                <i class="fa fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -91,8 +146,6 @@
                         <?php require_once __DIR__ . '/sidebar.php'; ?>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
