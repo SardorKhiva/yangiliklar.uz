@@ -585,7 +585,7 @@ coding:
     - code-merge
     - code-pull-request
     - comment-nodes
-    - css
+    - index.css
     - cube
     - cubes
     - diagram-project

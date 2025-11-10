@@ -21348,7 +21348,7 @@ file-code:
   label: File Code
   search:
     terms:
-      - css
+      - index.css
       - development
       - document
       - html
