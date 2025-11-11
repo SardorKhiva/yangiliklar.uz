@@ -2156,7 +2156,7 @@ var menu = $.widget( "ui.menu", {
 		this.activeMenu = this.element;
 
 		// Flag used to prevent firing of the click handler
-		// as the event bubbles up through nested menus
+		// as the event bubbles up through nested activeMenus
 		this.mouseHandled = false;
 		this.element
 			.uniqueId()
@@ -2241,7 +2241,7 @@ var menu = $.widget( "ui.menu", {
 
 		this.refresh();
 
-		// Clicks outside of a menu collapse any open menus
+		// Clicks outside of a menu collapse any open activeMenus
 		this._on( this.document, {
 			click: function( event ) {
 				if ( this._closeOnDocumentClick( event ) ) {
@@ -2255,7 +2255,7 @@ var menu = $.widget( "ui.menu", {
 	},
 
 	_destroy: function() {
-		// Destroy (sub)menus
+		// Destroy (sub)activeMenus
 		this.element
 			.removeAttr( "aria-activedescendant" )
 			.find( ".ui-menu" ).addBack()
@@ -2388,7 +2388,7 @@ var menu = $.widget( "ui.menu", {
 
 		this.element.toggleClass( "ui-menu-icons", !!this.element.find( ".ui-icon" ).length );
 
-		// Initialize nested menus
+		// Initialize nested activeMenus
 		submenus.filter( ":not(.ui-menu)" )
 			.addClass( "ui-menu ui-widget ui-widget-content ui-front" )
 			.hide()
@@ -2569,7 +2569,7 @@ var menu = $.widget( "ui.menu", {
 			var currentMenu = all ? this.element :
 				$( event && event.target ).closest( this.element.find( ".ui-menu" ) );
 
-			// If we found no valid submenu ancestor, use the main menu to close all sub menus anyway
+			// If we found no valid submenu ancestor, use the main menu to close all sub activeMenus anyway
 			if ( !currentMenu.length ) {
 				currentMenu = this.element;
 			}
@@ -2582,7 +2582,7 @@ var menu = $.widget( "ui.menu", {
 	},
 
 	// With no arguments, closes the currently active menu - if nothing is active
-	// it closes all menus.  If passed an argument, it will search for menus BELOW
+	// it closes all activeMenus.  If passed an argument, it will search for activeMenus BELOW
 	_close: function( startMenu ) {
 		if ( !startMenu ) {
 			startMenu = this.active ? this.active.parent() : this.element;

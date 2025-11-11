@@ -7,8 +7,7 @@
  * Maqsad: qo'shimcha yordamchi funksiyalar
  */
 
-
-define('PROJECT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/');
+require_once __DIR__ . '/CONSTANTS.php';
 
 // debug funksiya, massivdan nimalar kelyotganini tekshirish uchun
 #[\JetBrains\PhpStorm\NoReturn]

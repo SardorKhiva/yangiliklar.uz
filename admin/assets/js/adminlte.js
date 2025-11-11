@@ -884,7 +884,7 @@
             // Add keyboard support for custom components
             document.addEventListener('keydown', (event) => {
                 const target = event.target;
-                // Handle arrow key navigation for menus
+                // Handle arrow key navigation for activeMenus
                 if (target.closest('.nav, .navbar-nav, .dropdown-menu')) {
                     this.handleMenuNavigation(event);
                 }

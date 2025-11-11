@@ -90,7 +90,7 @@
                         <div class="col-lg-12">
                             <div class="main-button">
                                 <!-- barcha yangiliklar linkini ham dinamik qilib bazadan olamiz   -->
-                                <a href="<?= $menus[2]['url'] ?? " "; ?>">Barcha yangiliklarni ko'rish</a>
+                                <a href="<?= $activeMenus[2]['url'] ?? " "; ?>">Barcha yangiliklarni ko'rish</a>
                             </div>
                         </div>
                     </div>

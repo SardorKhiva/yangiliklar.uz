@@ -1,7 +1,7 @@
 <?php
 /**
  * @var $newsItem - yangilik massivi
- * @var $menus - menudagi barcha ma'lumotlar, nomi va sahifa sarlavhasi ham
+ * @var $activeMenus - menudagi barcha ma'lumotlar, nomi va sahifa sarlavhasi ham
  */
 ?>
 
@@ -16,20 +16,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
           rel="stylesheet">
 
-    <!-- Dinamik title $menus massivida menu ma'lumotlari bor, sahifa sarlavhasi ham dinamik o'zgaradi  -->
+    <!-- Dinamik title $activeMenus massivida menu ma'lumotlari bor, sahifa sarlavhasi ham dinamik o'zgaradi  -->
     <?php
     $currentPage = basename($_SERVER['PHP_SELF']);
 
     if ($_GET['controller'] !== 'news_view') {
 //    if (($_SERVER['REQUEST_URI']) === '/') {  // 1-usulda index sahifani olish
         if (($_GET['controller']) === NULL) {     // 2-usulda
-            $currentPage = SITE_NAME . ' - ' . $menus[0]['name'];
+            $currentPage = SITE_NAME . ' - ' . $activeMenus[0]['name'];
         } elseif ($_GET['controller'] === 'about') {
-            $currentPage = SITE_NAME . ' - ' . $menus[1]['name']; // 'Biz haqimizda';
+            $currentPage = SITE_NAME . ' - ' . $activeMenus[1]['name']; // 'Biz haqimizda';
         } elseif ($_GET['controller'] === 'all_news') {
-            $currentPage = SITE_NAME . ' - ' . $menus[2]['name'];
+            $currentPage = SITE_NAME . ' - ' . $activeMenus[2]['name'];
         } elseif ($_GET['controller'] === 'contact') {
-            $currentPage = SITE_NAME . ' - ' . $menus[3]['name'];
+            $currentPage = SITE_NAME . ' - ' . $activeMenus[3]['name'];
         }
     } else {
         if (!empty($newsItem)) {
@@ -92,8 +92,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
 
-                    <?php if (!empty($menus)): ?>
-                        <?php foreach ($menus as $menu): ?>
+                    <?php if (!empty($activeMenus)): ?>
+                        <?php foreach ($activeMenus as $menu): ?>
 
                             <li class="nav-item"> <!-- sariq rangli qilish uchun active classi kerak -->
                                 <a class="nav-link" href="<?= $menu['url']; ?>">
