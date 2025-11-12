@@ -37,7 +37,7 @@ if (!empty($_GET['acontroller'])) {
                     $status = isset($_POST['status']) ? (int)$_POST['status'] : 0;
 
                     if (!empty($name) && !empty($position) && !empty($url)) {
-                        if (!menuExists($name, $url)) {
+//                        if (!menuExists($name, $url)) {
 
                             if (menuCreate($name, $position, $url, $status)) {
                                 header('Location: ?acontroller=menu_index');
@@ -45,10 +45,10 @@ if (!empty($_GET['acontroller'])) {
                             } else {
                                 echo "Barcha maydonlar to'ldirilishi kerak!";
                             }
-                        } else {
-                            echo "Dublikat maydon mavjud, qayta tekshiring!";
-                        }
-                    }
+                        } // else {
+//                            echo "Dublikat maydon mavjud, qayta tekshiring!";
+//                        }
+//                    }
                 }
             }
             require_once __DIR__ . '/../views/menu/menu_form.php';

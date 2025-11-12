@@ -35,7 +35,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                 <!-- boshlanish::Jadval            -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h3 class="card-title">Bordered Table</h3>
+                        <h3 class="card-title">Menyular jadvali</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -49,7 +49,9 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                             name="name"
                                             class="form-control"
                                             required
-                                            id="menuName"/>
+                                            id="menuName"
+                                            value="<?= !empty($menuItem['name']) ? $menuItem['name'] : ''; ?>"
+                                    />
                                 </div>
                                 <div class="mb-3">
                                     <label for="menuPosition" class="form-label">Pozitsiyasi</label>
@@ -58,7 +60,9 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                             name="position"
                                             class="form-control"
                                             required
-                                            id="menuPosition"/>
+                                            id="menuPosition"
+                                            value="<?= !empty($menuItem['position']) ? $menuItem['position'] : ''; ?>"
+                                    />
                                 </div>
                                 <div class="mb-3">
                                     <label for="menuUrl" class="form-label">URL</label>
@@ -67,15 +71,30 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                             name="url"
                                             class="form-control"
                                             required
-                                            id="menuUrl"/>
+                                            id="menuUrl"
+                                            value="<?= !empty($menuItem['url']) ? $menuItem['url'] : ''; ?>"
+                                    />
                                 </div>
                                 <div class="mb-3">
+
+                                    <!--
+                                    <label class="form-label"> Status </label>
+                                    <select name="status" class="form-select">
+                                        <option <?php /*= isset($menuItem) && $menuItem['status'] === ACTIVE ? 'selected' : ''; */ ?>
+                                                value="<?php /*= ACTIVE */ ?>">Aktiv</option>
+                                        <option <?php /*= isset($menuItem) && $menuItem['status'] === NOT_ACTIVE ? 'selected' : ''; */ ?>
+                                                value="<?php /*= NOT_ACTIVE */ ?>">Aktiv emas</option>
+                                    </select>
+                                    -->
+
+                                    <?php // menga bu ko'rinish yoqdi ?>
                                     <label for="switch" class="form-label"> Status </label><br>
                                     <label for="switch" class="switch form-label">
                                         <input id="switch"
                                                type="checkbox"
                                                name="status"
-                                               value="<?= ACTIVE ?>">
+                                               value="<?= ACTIVE ?>"
+                                               <?= isset($menuItem) && $menuItem['status'] === ACTIVE ? 'checked' : ''; ?>>
                                         <span class="slider"></span>
                                     </label>
 
