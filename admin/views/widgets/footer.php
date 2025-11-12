@@ -19,6 +19,8 @@
 
 <!--begin::Required Plugin(AdminLTE)-->
 <script src="<?= ADMIN_ASSETS ?>/js/adminlte.js"></script>
+<script src="<?= ADMIN_ASSETS ?>/js/delete_menu_item.js"></script>
+
 <!--end::Required Plugin(AdminLTE)-->
 
 <!--end::Script-->

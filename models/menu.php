@@ -295,3 +295,16 @@ function menuUpdate(int $id, string $name, int $position, string $url, bool $sta
     }
 }
 */
+
+function menuDelete(int $id): bool
+{
+    global $pdo;
+    try {
+
+        $sql = "DELETE FROM `menu` WHERE `id` = :id";
+        $stmt = $pdo->prepare($sql);
+        return $stmt->execute([':id' => $id]);
+    } catch (PDOException $e) {
+        dd("Xatolik: <br>" . $e);
+    }
+}

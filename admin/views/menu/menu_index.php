@@ -38,7 +38,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                 <!-- boshlanish::Jadval            -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h3 class="card-title">Bordered Table</h3>
+                        <h3 class="card-title">Menyular</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -71,7 +71,9 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                                 <i class="fas fa-pencil"></i>
                                             </a>
                                             <a href="?acontroller=menu_delete&id=<?= $menu['id'] ?>"
-                                               class="btn btn-danger">
+                                               class="btn btn-danger delete_btn"
+                                               data-id="<?= $menu['id'] ?>">
+
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>

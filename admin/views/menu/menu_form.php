@@ -19,7 +19,9 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
                             <li class="breadcrumb-item"><a href="/admin">Asosiy</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Menyular</li>
+                            <li class="breadcrumb-item"><a href="?acontroller=menu_index">Menyular</a></li>
+                            <li class="breadcrumb-item active"
+                                aria-current="page"><?= !empty($menuItem['id']) ? "Tahrirlash" : "Qo'shish" ?></li>
                         </ol>
                     </div>
                 </div>
@@ -39,9 +41,17 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form method="post" action="?acontroller=menu_create">
+                        <form method="post"
+                                <?php // get so'rovga qarab menyu ni yangilash ?>
+                              action="?acontroller=<?= !empty($menuItem['id']) ? 'menu_update&id=' . $menuItem['id'] : 'menu_create'; ?>">
                             <!--begin::Body-->
                             <div class="card-body">
+                                <?php if (!empty($menuItem['id'])) : ?>
+                                    <label class="form-label">Menyu ID: </label>
+                                    <div class="mb-3 form-control bg-danger-subtle"> <?= !empty($menuItem['id']) ? ($menuItem['id']) : '' ?>
+                                    </div>
+                                <?php endif; ?>
+
                                 <div class="mb-3">
                                     <label for="menuName" class="form-label">Nomi</label>
                                     <input
@@ -77,7 +87,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                 </div>
                                 <div class="mb-3">
 
-                                    <!--
+                                    <!-- bu oddiyroq select form:
                                     <label class="form-label"> Status </label>
                                     <select name="status" class="form-select">
                                         <option <?php /*= isset($menuItem) && $menuItem['status'] === ACTIVE ? 'selected' : ''; */ ?>
@@ -94,7 +104,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                                type="checkbox"
                                                name="status"
                                                value="<?= ACTIVE ?>"
-                                               <?= isset($menuItem) && $menuItem['status'] === ACTIVE ? 'checked' : ''; ?>>
+                                                <?= isset($menuItem) && $menuItem['status'] === ACTIVE ? 'checked' : ''; ?>>
                                         <span class="slider"></span>
                                     </label>
 
@@ -104,7 +114,8 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                             <!--end::Body-->
                             <!--begin::Footer-->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit"
+                                        class="btn btn-primary"><?= !empty($menuItem['id']) ? "Tahrirlash" : "Saqlash"; ?></button>
                             </div>
                             <!--end::Footer-->
                         </form>
