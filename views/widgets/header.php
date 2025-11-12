@@ -18,23 +18,29 @@
 
     <!-- Dinamik title $activeMenus massivida menu ma'lumotlari bor, sahifa sarlavhasi ham dinamik o'zgaradi  -->
     <?php
-    $currentPage = basename($_SERVER['PHP_SELF']);
+    //    $currentPage = basename($_SERVER['PHP_SELF']);
+    $currentPage = null;
 
-    if ($_GET['controller'] !== 'news_view') {
-//    if (($_SERVER['REQUEST_URI']) === '/') {  // 1-usulda index sahifani olish
-        if (($_GET['controller']) === NULL) {     // 2-usulda
-            $currentPage = SITE_NAME . ' - ' . $activeMenus[0]['name'];
-        } elseif ($_GET['controller'] === 'about') {
-            $currentPage = SITE_NAME . ' - ' . $activeMenus[1]['name']; // 'Biz haqimizda';
-        } elseif ($_GET['controller'] === 'all_news') {
-            $currentPage = SITE_NAME . ' - ' . $activeMenus[2]['name'];
-        } elseif ($_GET['controller'] === 'contact') {
-            $currentPage = SITE_NAME . ' - ' . $activeMenus[3]['name'];
+    if (isset($_GET['controller'])) {
+        // agar sahifa ma'lum bir yangilik haqidagi sahifa bo'lmasa
+        // menus['name'] dan kerakli yozuvni title qilsin
+        if ($_GET['controller'] !== 'news_view') {
+            if ($_GET['controller'] === 'about') {
+                $currentPage = SITE_NAME . ' - ' . $activeMenus[1]['name']; // 'Biz haqimizda';
+            } elseif ($_GET['controller'] === 'all_news') {
+                $currentPage = SITE_NAME . ' - ' . $activeMenus[2]['name'];
+            } elseif ($_GET['controller'] === 'contact') {
+                $currentPage = SITE_NAME . ' - ' . $activeMenus[3]['name'];
+            }
+        } else {
+            // va agar yangilik jadvali bo'sh bo'lmasa
+            // sayt nomi + shu jadvalning sarlavha ustuni yozuvi sahifa sarlavhasi bo'lsin
+            if (!empty($newsItem)) {
+                $currentPage = SITE_NAME . ' ' . htmlspecialchars($newsItem['sarlavha'], ENT_QUOTES, 'UTF-8');
+            }
         }
     } else {
-        if (!empty($newsItem)) {
-            $currentPage = htmlspecialchars($newsItem['sarlavha'], ENT_QUOTES, 'UTF-8');
-        }
+        $currentPage = SITE_NAME . ' - ' . $activeMenus[0]['name'];
     }
 
     ?>
@@ -70,7 +76,7 @@
             <?= $_SESSION['error']; ?>
         </div>
 
-        <?php // 3 soniyadan keyin o'chadigan JS alert   ?>
+    <?php // 3 soniyadan keyin o'chadigan JS alert   ?>
 
         <script>
             setTimeout(() => {

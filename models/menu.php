@@ -131,14 +131,15 @@ function positionExists(int $position): bool
     return $stmt->fetchColumn() > 0;
 }
 
-function getMenuById(int $id): array
+function getMenuById(int $id): ?array
 {
     global $pdo;
-    $sql = "SELECT * FROM `menu` WHERE `id` = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':id' => $id]);
     try {
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM `menu` WHERE `id` = :id";
+        $stmt = $pdo->prepare($sql); // PDOda bitta yozuvni assotsiativ massiv sifatida olish (SELECT natijasidan). (ya’ni ustun nomlari bilan) qaytariladi.
+        $stmt->execute([':id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row !== FALSE ? $row : NULL; // row agar false bo'lmasa o'zini qaytarsin, aks holda null ni
     } catch (PDOException $e) {
         dd($e->getMessage());
     }
