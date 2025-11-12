@@ -57,18 +57,23 @@ if (!empty($_GET['acontroller'])) {
 
         case 'menu_update':
         {
-            // menu id ni bo'sh emaslikka va jadvalda shunday id bor emasligiga tekshiramiz
-            if (!empty($_GET['id']) && !isSetMenuID($_GET['id'])) {
+            // ID mavjudligini va toza integerligini tekshirish:
+            $id = isset($_GET['id']) ? (int)trim($_GET['id']) : 0; // id getda bo'lsa int casting, aks holda 0 olsin
+            if ($id <= 0) {
                 require_once __DIR__ . '/../views/404.php';
-            } else {
-                $id = trim($_GET['id']);
-                $id = htmlspecialchars($id);
-
-                $menuItem = getMenuById($id);
-                if (!$menuItem) {
-                    require_once __DIR__ . '/../views/404.php';
-                }
+                exit();
             }
+
+            // jadvaldagi qiymatni olamiz
+            $menuItem = getMenuById($id);
+
+            // agar menu jadvalida bunday id li yozuv topilmasa 404
+            if (NULL === $menuItem) {
+                require_once __DIR__ . '/../views/404.php';
+                exit();
+            }
+
+            // agar topilsa forada ko'rsatilsin
             require_once __DIR__ . '/../views/menu/menu_form.php';
             break;
         }
