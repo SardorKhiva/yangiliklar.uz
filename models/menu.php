@@ -81,19 +81,28 @@ function nameExists(string $name): bool
 {
     global $pdo;
 
-    $stmt = $pdo->prepare("SELECT * FROM `menu` WHERE `name` = :name");
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `menu` WHERE `name` = :name");
     $stmt->execute(['name' => $name]);
-    return $stmt->rowCount() > 0;
+    return $stmt->fetchColumn() > 0;
 }
+
+/*function nameExists(string $name): bool
+{
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT 1 FROM `menu` WHERE `name` = :name LIMIT 1");
+    $stmt->execute(['name' => $name]);
+    return (bool) $stmt->fetch();
+}*/
 
 
 function urlExists(string $url): bool
 {
     global $pdo;
 
-    $stmt = $pdo->prepare("SELECT * FROM `menu` WHERE `url` = :url;");
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `menu` WHERE `url` = :url;");
     $stmt->execute(['url' => $url]);
-    return $stmt->rowCount() > 0;
+    return $stmt->fetchColumn() > 0;
 }
 
 /**
@@ -195,6 +204,16 @@ function getMenuById(int $id): ?array
     } catch (PDOException $e) {
         dd($e->getMessage());
     }
+}
+
+function getMaxMenuPosition(): int
+{
+    global $pdo;
+    $sql = "SELECT MAX(`position`) FROM `menu`";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row['MAX(`position`)'];
 }
 
 function isSetMenuID(int $id): bool

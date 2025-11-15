@@ -52,12 +52,14 @@ Tavsiyalar
 -- DROP TABLE IF EXISTS `menu`; -- jadvalni o'chirish
 --  Menyu jadvali
 
-CREATE TABLE `menu`
+-- DROP TABLE `menu`;
+
+CREATE TABLE IF NOT EXISTS `menu`
 (
     `id`       INTEGER PRIMARY KEY AUTOINCREMENT,
-    `name`     TEXT    NOT NULL UNIQUE,
-    `position` INTEGER NOT NULL UNIQUE,
-    `url`      TEXT    NOT NULL UNIQUE,
+    `name`     TEXT    NOT NULL,
+    `position` INTEGER NOT NULL,
+    `url`      TEXT    NOT NULL,
     `status`   INTEGER NOT NULL CHECK (`status` IN (0, 1))
 );
 

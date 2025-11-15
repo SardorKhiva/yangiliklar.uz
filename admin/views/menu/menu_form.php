@@ -39,13 +39,27 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                     <div class="card-header">
                         <h3 class="card-title">Menyular jadvali</h3>
                     </div>
+
+
+
                     <!-- /.card-header -->
                     <div class="card-body">
+
+                        <?php if (!empty($_SERVER['error'])) : ?>
+                            <div class="mb-3 success_alert">
+                                <label class="form-label text-accessible-danger">
+                                    <?= $_SERVER['error']; ?>
+                                </label>
+                            </div>
+                        <?php endif; ?>
+
                         <form method="post"
                                 <?php // get so'rovga qarab menyu ni yangilash ?>
                               action="?acontroller=<?= !empty($menuItem['id']) ? 'menu_update&id=' . $menuItem['id'] : 'menu_create'; ?>">
                             <!--begin::Body-->
                             <div class="card-body">
+
+
                                 <?php if (!empty($menuItem['id'])) : ?>
                                     <label class="form-label">Menyu ID: </label>
                                     <div class="mb-3 form-control bg-danger-subtle"> <?= !empty($menuItem['id']) ? ($menuItem['id']) : '' ?>
@@ -55,14 +69,19 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                 <div class="mb-3">
                                     <label for="menuName" class="form-label">Nomi</label>
                                     <input
-                                            type="text"
-                                            name="name"
+                                            type="text" name="name"
                                             class="form-control"
-                                            required
-                                            id="menuName"
+                                            required id="menuName"
                                             value="<?= !empty($menuItem['name']) ? $menuItem['name'] : ''; ?>"
                                     />
+                                    <?php if (isset($_POST['name']) && nameExists($_POST['name']))  : ?>
+                                        <div class="mb-2 success_alert">
+                                            <label class="form-label"><i class="text-accessible-danger"><b><?= $_POST['name']?></b> nomi
+                                                    menyu jadvalida takrorlanyapti!</i></label>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="menuPosition" class="form-label">Pozitsiyasi</label>
                                     <input
@@ -71,7 +90,10 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                             class="form-control"
                                             required
                                             id="menuPosition"
-                                            value="<?= !empty($menuItem['position']) ? $menuItem['position'] : ''; ?>"
+                                            step="1"
+                                            min="<?= empty($menuItem) ? getMaxMenuPosition() + 1 : $menuItem['position']; ?>"
+                                            <?php // getMaxMenuPosition()+1 degani, yangi menu qo'shilganda mavjud oxirgi pozitsiyaga birni avtomat qo'shadi ?>
+                                            value="<?= !empty($menuItem['position']) ? $menuItem['position'] : getMaxMenuPosition() + 1; ?>"
                                     />
                                 </div>
                                 <div class="mb-3">
@@ -84,6 +106,12 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                             id="menuUrl"
                                             value="<?= !empty($menuItem['url']) ? $menuItem['url'] : ''; ?>"
                                     />
+                                    <?php if (isset($_POST['url']) && urlExists($_POST['url']))  : ?>
+                                        <div class="mb-2 success_alert">
+                                            <label class="form-label"><i class="text-accessible-danger"><b><?= $_POST['url']?></b> manzili
+                                                    menyu jadvalida takrorlanyapti!</i></label>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="mb-3">
 

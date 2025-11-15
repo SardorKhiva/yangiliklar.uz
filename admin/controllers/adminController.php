@@ -39,16 +39,17 @@ if (!empty($_GET['acontroller'])) {
                     if (!empty($name) && !empty($position) && !empty($url)) {
                         if (!nameExists($name) && !positionExists($position) && !urlExists($url)) {
 
-
                             if (menuCreate($name, $position, $url, $status)) {
                                 $_SESSION['success'] = "Menyu muvaffaqiyatli qo'shildi!";
                                 header('Location: ?acontroller=menu_index');
                                 exit();
                             }
 
+                        } else {
                             $_SERVER['error'] = "Bunday yozuv menyuda bor!";
                         }
                     }
+
                 }
 
 
@@ -88,7 +89,7 @@ if (!empty($_GET['acontroller'])) {
                     // agar bunday qiymatlar oldin menu da bo'lmasa
 //                    if (!menuExists($name, $url, $id)) {
                     // menu yozuvlari id orqali yangilansin
-                    elseif (menuUpdate($id, $name, $position, $url, $status)) {
+                    elseif (!nameExists($name) && !urlExists($url) && menuUpdate($id, $name, $position, $url, $status)) {
                         $_SESSION['success'] = "Menyu muvaffaqiyatli tahrirlandi!";
                         header('Location: ?acontroller=menu_index');
                         exit();
