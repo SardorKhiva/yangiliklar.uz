@@ -25,6 +25,12 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                     <div class="col-sm-12 d-flex justify-content-end">
                         <a href="?acontroller=menu_create" class="btn btn-success">+ qo'shish</a>
                     </div>
+                    <?php if (!empty($_SESSION['success'])): ?>
+                        <div class="col-sm-12 mt-2 success_alert">
+                            <div class="alert alert-success"> <?= $_SESSION['success']; ?> </div>
+                        </div>
+                    <?php endif; ?>
+                    <?php unset($_SESSION['success']); ?>
                 </div>
                 <!--end::Row-->
             </div>

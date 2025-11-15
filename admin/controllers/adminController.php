@@ -41,6 +41,7 @@ if (!empty($_GET['acontroller'])) {
 
 
                             if (menuCreate($name, $position, $url, $status)) {
+                                $_SESSION['success'] = "Menyu muvaffaqiyatli qo'shildi!";
                                 header('Location: ?acontroller=menu_index');
                                 exit();
                             }
@@ -88,6 +89,7 @@ if (!empty($_GET['acontroller'])) {
 //                    if (!menuExists($name, $url, $id)) {
                     // menu yozuvlari id orqali yangilansin
                     elseif (menuUpdate($id, $name, $position, $url, $status)) {
+                        $_SESSION['success'] = "Menyu muvaffaqiyatli tahrirlandi!";
                         header('Location: ?acontroller=menu_index');
                         exit();
                     }
@@ -106,6 +108,7 @@ if (!empty($_GET['acontroller'])) {
             if (!empty($_GET['id'])) {
                 $id = htmlspecialchars($_GET['id'], ENT_QUOTES, 'UTF-8');
                 if (menuDelete($id)) {
+                    $_SESSION['success'] = "Menyu muvaffaqiyatli o'chirildi!";
                     header('Location: ?acontroller=menu_index');
                     exit();
                 }
