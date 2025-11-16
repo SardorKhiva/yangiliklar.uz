@@ -22,38 +22,26 @@ if (!empty($_GET['acontroller'])) {
 
         case 'menu_create':
         {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                /*
-                      htmlspecialchars()  XSS dan himoya qiladi.
-                      trim()  Bo‘sh joylarni olib tashlaydi.
-                      filter_var(..., FILTER_SANITIZE_URL)  havola (URL) ni tozalaydi.
-                      (int)  status ni raqamga aylantiradi, bu SQL Injection xavfini kamaytiradi.
-                      $_POST['...'] ?? ''  agar kalit yo‘q bo‘lsa, xatolik chiqmasligi uchun.
-                    */
                 if (!empty($_POST)) {
+                    $id = (isset($_POST['id'])) ? $_POST['id'] : 0;
                     $name = htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8');
                     $position = htmlspecialchars(trim($_POST['position'] ?? ''), ENT_QUOTES, 'UTF-8');
                     $url = filter_var(trim($_POST['url']) ?? '', FILTER_SANITIZE_URL);
                     $status = isset($_POST['status']) ? (int)$_POST['status'] : 0;
 
                     if (!empty($name) && !empty($position) && !empty($url)) {
-                        if (!nameExists($name) && !positionExists($position) && !urlExists($url)) {
+                        if (!nameExists($name, $id) && !positionExists($position) && !urlExists($url, $id)) {
 
                             if (menuCreate($name, $position, $url, $status)) {
                                 $_SESSION['success'] = "Menyu muvaffaqiyatli qo'shildi!";
                                 header('Location: ?acontroller=menu_index');
                                 exit();
                             }
-
                         } else {
-                            $_SERVER['error'] = "Bunday yozuv menyuda bor!";
+                            $_SESSION['error'] = "Bunday yozuv menyuda bor!";
                         }
                     }
-
                 }
-
-
-            }
             require_once __DIR__ . '/../views/menu/menu_form.php';
             break;
         }
@@ -89,7 +77,7 @@ if (!empty($_GET['acontroller'])) {
                     // agar bunday qiymatlar oldin menu da bo'lmasa
 //                    if (!menuExists($name, $url, $id)) {
                     // menu yozuvlari id orqali yangilansin
-                    elseif (!nameExists($name) && !urlExists($url) && menuUpdate($id, $name, $position, $url, $status)) {
+                    elseif (!nameExists($name, $id) && !urlExists($url) && menuUpdate($id, $name, $position, $url, $status)) {
                         $_SESSION['success'] = "Menyu muvaffaqiyatli tahrirlandi!";
                         header('Location: ?acontroller=menu_index');
                         exit();

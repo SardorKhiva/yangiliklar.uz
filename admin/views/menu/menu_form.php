@@ -29,11 +29,26 @@ require_once __DIR__ . '/../widgets/sidebar.php';
             </div>
             <!--end::Container-->
         </div>
+
+
         <!--end::App Content Header-->
         <!--begin::App Content-->
         <div class="app-content">
             <!--begin::Container-->
+
+
             <div class="container-fluid">
+
+                <?php if (!empty($menuItem) && !empty($_SESSION['error'])) : ?>
+                    <div class="col-sm-12 mt-2 failed_alert">
+                        <div class="alert alert-danger">
+                            <?= $_SESSION['error']; ?>
+                            <b>Session error</b>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php unset($_SESSION['error']); ?>
+
                 <!-- boshlanish::Jadval            -->
                 <div class="card mb-4">
                     <div class="card-header">
@@ -41,17 +56,9 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                     </div>
 
 
-
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <?php if (!empty($_SERVER['error'])) : ?>
-                            <div class="mb-3 success_alert">
-                                <label class="form-label text-accessible-danger">
-                                    <?= $_SERVER['error']; ?>
-                                </label>
-                            </div>
-                        <?php endif; ?>
 
                         <form method="post"
                                 <?php // get so'rovga qarab menyu ni yangilash ?>
@@ -76,7 +83,8 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                     />
                                     <?php if (isset($_POST['name']) && nameExists($_POST['name']))  : ?>
                                         <div class="mb-2 success_alert">
-                                            <label class="form-label"><i class="text-accessible-danger"><b><?= $_POST['name']?></b> nomi
+                                            <label class="form-label"><i
+                                                        class="text-accessible-danger"><b><?= $_POST['name'] ?></b> nomi
                                                     menyu jadvalida takrorlanyapti!</i></label>
                                         </div>
                                     <?php endif; ?>
@@ -108,7 +116,9 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                     />
                                     <?php if (isset($_POST['url']) && urlExists($_POST['url']))  : ?>
                                         <div class="mb-2 success_alert">
-                                            <label class="form-label"><i class="text-accessible-danger"><b><?= $_POST['url']?></b> manzili
+                                            <label class="form-label"><i
+                                                        class="text-accessible-danger"><b><?= $_POST['url'] ?></b>
+                                                    manzili
                                                     menyu jadvalida takrorlanyapti!</i></label>
                                         </div>
                                     <?php endif; ?>

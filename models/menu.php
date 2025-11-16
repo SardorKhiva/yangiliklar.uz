@@ -73,36 +73,32 @@ function getAllMenus(string $sort = 'id', string $order = 'ASC'): array
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         dd($e->getMessage());
-        return [];
     }
 }
 
-function nameExists(string $name): bool
+function nameExists(string $name, int $id = 0): bool
 {
     global $pdo;
 
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `menu` WHERE `name` = :name");
-    $stmt->execute(['name' => $name]);
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `menu` WHERE `name` = :name AND `id` != :id");
+    $stmt->execute([':name' => $name, ':id' => $id]);
+
     return $stmt->fetchColumn() > 0;
 }
 
-/*function nameExists(string $name): bool
+
+function urlExists(string $url, int $id = 0): bool
 {
     global $pdo;
 
-    $stmt = $pdo->prepare("SELECT 1 FROM `menu` WHERE `name` = :name LIMIT 1");
-    $stmt->execute(['name' => $name]);
-    return (bool) $stmt->fetch();
-}*/
+    $url = trim($url);
+    if ($url === '') {
+        return false; // bo'sh URLni duplikat deb hisoblamaymiz
+    }
 
-
-function urlExists(string $url): bool
-{
-    global $pdo;
-
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `menu` WHERE `url` = :url;");
-    $stmt->execute(['url' => $url]);
-    return $stmt->fetchColumn() > 0;
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `menu` WHERE `url` = :url AND `id` != :id");
+    $stmt->execute([':url' => $url, ':id' => $id]);
+    return (int)$stmt->fetchColumn() > 0;
 }
 
 /**
@@ -138,7 +134,6 @@ function menuCreate(string $name, int $position, string $url, int $status): bool
         return $stmt->execute();
     } catch (PDOException $e) {
         dd($e->getMessage());
-        return false;
     }
 }
 
@@ -183,12 +178,29 @@ function menuExists(string $name, string $url, int $excludeId = 0): bool
     return $stmt->fetchColumn() > 0;
 }
 
-
-function positionExists(int $position): bool
+/**
+ * Berilgan pozitsiyada (position) menyu elementi mavjudligini tekshiradi.
+ * Yangilash (UPDATE) holatida, berilgan ID'ga ega elementni tekshiruvdan chiqarib tashlaydi.
+ *
+ * @param int $position Tekshirilayotgan menyu pozitsiyasi.
+ * @param int $excludeId Tekshiruvdan chiqarib tashlanadigan element ID'si (yangilash uchun 0 bo'lmasligi kerak).
+ * @return bool Agar pozitsiya band bo'lsa true, aks holda false qaytaradi.
+ */
+function positionExists(int $position, int $excludeId = 0): bool
 {
     global $pdo;
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM menu WHERE position = :position");
-    $stmt->execute([':position' => $position]);
+
+    // SQL so'rovi: berilgan pozitsiyaga ega, lekin ID'si excludeId'ga teng bo'lmagan yozuvlarni sanaymiz.
+    $sql = "SELECT COUNT(*) FROM menu WHERE position = :position AND `id` != :excludeId";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([
+        ':position' => $position,
+        ':excludeId' => $excludeId
+    ]);
+
+    // Agar natija 0 dan katta bo'lsa, bu pozitsiya band degani.
     return $stmt->fetchColumn() > 0;
 }
 
@@ -282,7 +294,6 @@ function menuUpdate(int $id, string $name, int $position, string $url, int $stat
 
     } catch (PDOException $e) {
         dd("Xatolik: " . $e->getMessage());
-        return false;
     }
 }
 
