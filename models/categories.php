@@ -21,3 +21,30 @@ function getCategories(): array
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getAllCategories(): array
+{
+    global $pdo;
+    $sql = "SELECT * FROM `category`
+    ORDER BY `id`";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    try {
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        dd($e->getMessage());
+    }
+}
+
+function categoryDelete(int $id): bool
+{
+    global $pdo;
+    try {
+
+        $sql = "DELETE FROM `category` WHERE `id` = :id";
+        $stmt = $pdo->prepare($sql);
+        return $stmt->execute([':id' => $id]);
+    } catch (PDOException $e) {
+        dd("Xatolik: <br>" . $e);
+    }
+}
