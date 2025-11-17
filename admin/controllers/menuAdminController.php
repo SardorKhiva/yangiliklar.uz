@@ -1,46 +1,42 @@
 <?php
-/**
- * Foydalanuvchi: User
- * Loyiha nomi: yangiliklar.uz
- * Fayl nomi: menuAdminController.php
- * Fayl yaratilgan: 16.11.2025 12:26
- * Maqsad:
- */
-
+//D:\exe\OSPanel_5_4_3\domains\yangiliklar.uz\admin\controllers\menuAdminController.php
 
 if (!empty($_GET['acontroller'])) {
     $controller = $_GET['acontroller'];
+    $menusAll = getAllMenus();   // bazadan menyularni olish
 
     switch ($controller) {
         case 'menu_index':
         {
-            $menus = getAllMenus();   // bazadan menyularni olish
             require_once __DIR__ . '/../views/menu/menu_index.php';
             break;
         }
 
         case 'menu_create':
         {
-            if (!empty($_POST)) {
-                $id = (isset($_POST['id'])) ? $_POST['id'] : 0;
-                $name = htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8');
+            if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
+                $name = trim($_POST['name']);
                 $position = htmlspecialchars(trim($_POST['position'] ?? ''), ENT_QUOTES, 'UTF-8');
                 $url = filter_var(trim($_POST['url']) ?? '', FILTER_SANITIZE_URL);
-                $status = isset($_POST['status']) ? (int)$_POST['status'] : 0;
+                $status = isset($_POST['status']) ? ACTIVE : NOT_ACTIVE;
 
-                if (!empty($name) && !empty($position) && !empty($url)) {
-                    if (!menuNameExists($name, $id) && !positionExists($position) && !urlExists($url, $id)) {
-
-                        if (menuCreate($name, $position, $url, $status)) {
-                            $_SESSION['success'] = "Menyu muvaffaqiyatli qo'shildi!";
-                            header('Location: ?acontroller=menu_index');
-                            exit();
-                        }
+                if (empty($name)) {
+                    $_SESSION['error'] = "Menyu nomi bo'sh bo'lmasligi kerak!";
+                } elseif (empty($url)) {
+                    $_SESSION['error'] = "Menyu urli bo'sh bo'lmasligi kerak!";
+                } elseif (menuNameExists($name, 0)) {
+                    $_SESSION['error'] = "Bunday menyu nomi mavjud!";
+                } else {
+                    if (menuCreate($name, $position, $url, $status)) {
+                        $_SESSION['success'] = "Menyu qo'shildi!";
+                        header("location: ?acontroller=menu_index");
+                        exit();
                     } else {
-                        $_SESSION['error'] = "Bunday yozuv menyuda bor!";
+                        $_SESSION['error'] = "Menyu qo'shishda xatolik!";
                     }
                 }
             }
+            $menuItem = null;
             require_once __DIR__ . '/../views/menu/menu_form.php';
             break;
         }
@@ -48,7 +44,8 @@ if (!empty($_GET['acontroller'])) {
         case 'menu_update':
         {
             // ID mavjudligini va toza integerligini tekshirish:
-            $id = !empty($_GET['id']) ? (int)trim($_GET['id']) : 0; // id getda bo'lsa int casting, aks holda 0 olsin
+            $id = !empty($_GET['id']) ? (int)$_GET['id'] : 0; // id getda bo'lsa int casting, aks holda 0 olsin
+
             if ($id <= 0) {
                 require_once __DIR__ . '/../views/404.php';
                 exit();
@@ -64,28 +61,34 @@ if (!empty($_GET['acontroller'])) {
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (!empty($_POST)) {
-                    $name = htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8');
-                    $url = filter_var(trim($_POST['url']) ?? '', FILTER_SANITIZE_URL);
-                    $position = htmlspecialchars(trim($_POST['position'] ?? ''), ENT_QUOTES, 'UTF-8');
-                    $status = isset($_POST['status']) ? (int)$_POST['status'] : 0;
+//                $id = trim($_POST['id']) ?? $menuItem['id'];
+                $name = trim($_POST['name']);
+                $url = filter_var(trim($_POST['url']) ?? '', FILTER_SANITIZE_URL);
+                $position = htmlspecialchars(trim($_POST['position'] ?? ''), ENT_QUOTES, 'UTF-8');
+                $status = isset($_POST['status']) ? (int)$_POST['status'] : 0;
 
-                    if (empty($name) || empty($position) || empty($url) || !isset($status)) {
-                        $_SESSION['error'] = "Barcha maydonlar to'ldirilishi kerak!";
-                    }
-                    // agar bunday qiymatlar oldin menu da bo'lmasa
-//                    if (!menuExists($name, $url, $id)) {
-                    // menu yozuvlari id orqali yangilansin
-                    elseif (!menuNameExists($name, $id) && !urlExists($url) && menuUpdate($id, $name, $position, $url, $status)) {
-                        $_SESSION['success'] = "Menyu muvaffaqiyatli tahrirlandi!";
-                        header('Location: ?acontroller=menu_index');
+                if (empty($name)) {
+                    $_SESSION['error'] = "Menyu nomi bo'sh bo'lmasligi kerak!";
+                } elseif (empty($url)) {
+                    $_SESSION['error'] = "Menyu manzili bo'sh bo'lmasligi kerak!";
+                } elseif (menuNameExists($name, $id)) {
+                    $_SESSION['error'] = "Bunday menyu nomi mavjud!";
+                } else {
+                    if (menuUpdate($id, $name, $position, $url, $status)) {
+                        $_SESSION['success'] = "Menyu elementi yangilandi!";
+                        header("location: ?acontroller=menu_index");
                         exit();
+                    } else {
+                        $_SESSION['error'] = "Menyu yangilashda xatolik!";
                     }
-                    /* } else {
-                        echo "Dublikat maydon mavjud, qayta tekshiring!";
-                    } */
                 }
+                $menuItem['name'] = $name;
+                $menuItem['url'] = $url;
+                $menuItem['status'] = $status;
+                $menuItem['position'] = $position;
+
             }
+
             // agar topilsa forada ko'rsatilsin
             require_once __DIR__ . '/../views/menu/menu_form.php';
             break;
@@ -94,12 +97,15 @@ if (!empty($_GET['acontroller'])) {
         case 'menu_delete':
         {
             if (!empty($_GET['id'])) {
-                $id = htmlspecialchars($_GET['id'], ENT_QUOTES, 'UTF-8');
+                $id = (int)($_GET['id']);
+
                 if (menuDelete($id)) {
                     $_SESSION['success'] = "Menyu muvaffaqiyatli o'chirildi!";
-                    header('Location: ?acontroller=menu_index');
-                    exit();
+                } else {
+                    $_SESSION['error'] = "Menyu o'chirishda xatolik!";
                 }
+                header('Location: ?acontroller=menu_index');
+                exit();
             }
             break;
         }

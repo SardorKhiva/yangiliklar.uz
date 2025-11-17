@@ -35,12 +35,18 @@ function getActiveMenus(): array
             SELECT
                 *
             FROM `menu`
-            WHERE `status` = " . ACTIVE .
-        " ORDER BY `position`";
+            WHERE `status` = :status
+            ORDER BY `position`";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['status' => ACTIVE]);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Database error in getActiveMenus(): " . $e->getMessage());
+        return [];
+    }
 }
 
 /**
@@ -76,14 +82,20 @@ function getAllMenus(string $sort = 'id', string $order = 'ASC'): array
     }
 }
 
+
 function menuNameExists(string $name, int $id = 0): bool
 {
     global $pdo;
 
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `menu` WHERE `name` = :name AND `id` != :id");
-    $stmt->execute([':name' => $name, ':id' => $id]);
-
-    return $stmt->fetchColumn() > 0;
+    try {
+        $stmt = $pdo->prepare("SELECT COUNT(*) AS `count` FROM `menu` WHERE `name` = :name AND `id` != :id");
+        $stmt->execute([':name' => $name, ':id' => $id]);
+        $natija = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $natija['count'] > 0;
+    } catch (PDOException $e) {
+        error_log("Database error in menuNameExists(): " . $e->getMessage());
+        return false;
+    }
 }
 
 
@@ -257,9 +269,13 @@ function menuUpdate(int $id, string $name, int $position, string $url, int $stat
         $stmt = $pdo->prepare("
             SELECT COUNT(*) 
             FROM `menu` 
-            WHERE (`name` = :name OR `position` = :position OR `url` = :url)
-              AND `id` != :id
-        ");
+            WHERE 
+                   `id`      != :id AND (
+                   `name`     = :name     OR 
+                   `position` = :position OR 
+                   `url`      = :url)    
+                  ");
+
         $stmt->execute([
             ':name' => $name,
             ':position' => $position,
@@ -268,19 +284,45 @@ function menuUpdate(int $id, string $name, int $position, string $url, int $stat
         ]);
 
         if ($stmt->fetchColumn() > 0) {
-            echo "Dublikat maydon mavjud! (nom, pozitsiya yoki URL allaqachon ishlatilgan)";
+            // ANIQ QAYSI MAYDON DUBLIKAT?
+            $duplicates = [];
+
+//            Nomni tekshirish
+            $stmt = $pdo->prepare("SELECT `id` 
+                                   FROM `menu` 
+                                   WHERE `name` = :name AND 
+                                         `id` != :id");
+            $stmt->execute([':name' => $name, ':id' => $id]);
+            if ($stmt->fetchColumn() > 0) {
+                $duplicates[] = "nom";
+            }
+
+            // pozitsiya tekshiruvi
+            $stmt = $pdo->prepare("SELECT COUNT(*) 
+            FROM `menu` WHERE `position` = :position AND `id` != :id");
+            $stmt->execute([':position' => $position, ':id' => $id]);
+            if ($stmt->fetchColumn() > 0) {
+                $duplicates[] = "pozitsiya";
+            }
+
+            // url tekshiruvi
+            $stmt = $pdo->prepare("SELECT COUNT(*)
+                                   FROM `menu` 
+                                   WHERE `position` = :position AND 
+                                         `id`      != :id");
+            $_SESSION['error'] = "Bu " . implode(", ", $duplicates) . " boshqa menyuda ishlatilgan!";
             return false;
         }
 
         // Agar dublikat yo‘q bo‘lsa — yozuvni yangilaymiz
         $sql = "
-            UPDATE menu
+            UPDATE `menu`
             SET 
-                name = :name,
-                position = :position,
-                url = :url,
-                status = :status
-            WHERE id = :id
+                `name`     = :name,
+                `position` = :position,
+                `url`      = :url,
+                `status`   = :status
+            WHERE   `id`   = :id
         ";
 
         $stmt = $pdo->prepare($sql);
@@ -293,38 +335,11 @@ function menuUpdate(int $id, string $name, int $position, string $url, int $stat
         ]);
 
     } catch (PDOException $e) {
-        dd("Xatolik: " . $e->getMessage());
+        error_log("Ma'lumotlar bazasida xatolik, menuUpdate() da: " . $e->getMessage());
+        $_SESSION['error'] = "Ma'lumotlar bazasi xatoligi bor!";
+        return false;
     }
 }
-
-/*
-function menuUpdate(int $id, string $name, int $position, string $url, bool $status)
-{
-    global $pdo;
-
-    $sql = "UPDATE `menu` 
-            SET `name` = :name,
-                `position` = :position,
-                `url` = :url,
-                `status` = :status
-        WHERE `id` = :id; ";
-
-    $stmt = $pdo->prepare($sql);
-
-    // paraqmetrlarni bog'lash
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    $stmt->bindParam(':position', $position, PDO::PARAM_INT);
-    $stmt->bindParam(':url', $url, PDO::PARAM_STR);
-    $stmt->bindParam(':status', $status, PDO::PARAM_INT);
-
-    try {
-        return $stmt->execute();
-    } catch (PDOException $e) {
-        dd($e->getMessage());
-    }
-}
-*/
 
 function menuDelete(int $id): bool
 {

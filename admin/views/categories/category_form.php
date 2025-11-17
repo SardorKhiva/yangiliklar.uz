@@ -35,8 +35,6 @@ require_once __DIR__ . '/../widgets/sidebar.php';
         <div class="app-content">
             <!--begin::Container-->
             <div class="container-fluid">
-
-
                 <!-- boshlanish::Jadval            -->
                 <div class="card mb-4">
                     <div class="card-header">
@@ -52,7 +50,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                     <?= $_SESSION['error']; ?>
                                 </div>
                             </div>
-                                    <?php unset($_SESSION['error']); ?>
+                        <?php unset($_SESSION['error']); ?>
                         <?php endif; ?>
 
                         <form method="post"

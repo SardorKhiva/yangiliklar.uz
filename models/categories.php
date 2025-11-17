@@ -1,5 +1,6 @@
 <?php
 //D:\exe\OSPanel_5_4_3\domains\yangiliklar.uz\models\categories.php
+/*
 function isExists(string $name): bool
 {
     global $pdo;
@@ -14,6 +15,7 @@ function isExists(string $name): bool
         dd($e->getMessage());
     }
 }
+*/
 
 function getCategories(): array
 {
@@ -24,8 +26,8 @@ function getCategories(): array
             WHERE `status` = :status
             ORDER BY `id`
             ";
-    try {
 
+    try {
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['status' => ACTIVE]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -59,7 +59,7 @@ if (!empty($_GET['acontroller'])) {
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $name = htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES, 'UTF-8');
+                $name = trim($_POST['name']);
                 $status = isset($_POST['status']) ? ACTIVE : NOT_ACTIVE;
 
                 if (empty($name)) {
