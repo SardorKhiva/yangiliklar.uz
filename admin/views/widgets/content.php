@@ -207,7 +207,7 @@
                                     <!-- /.direct-chat-infos -->
                                     <img
                                             class="direct-chat-img"
-                                            src="../assets/img/user1-128x128.jpg"
+                                            src="<?= ADMIN_ASSETS?>img/user1-128x128.jpg"
                                             alt="message user image"
                                     />
                                     <!-- /.direct-chat-img -->
@@ -227,7 +227,7 @@
                                     <!-- /.direct-chat-infos -->
                                     <img
                                             class="direct-chat-img"
-                                            src="../assets/img/user3-128x128.jpg"
+                                            src="<?= ADMIN_ROOT; ?>assets/img/user3-128x128.jpg"
                                             alt="message user image"
                                     />
                                     <!-- /.direct-chat-img -->
@@ -245,7 +245,7 @@
                                     <!-- /.direct-chat-infos -->
                                     <img
                                             class="direct-chat-img"
-                                            src="../assets/img/user1-128x128.jpg"
+                                            src="<?= ADMIN_ASSETS?>/img/user1-128x128.jpg"
                                             alt="message user image"
                                     />
                                     <!-- /.direct-chat-img -->
@@ -378,7 +378,7 @@
                                         <a href="#">
                                             <img
                                                     class="contacts-list-img"
-                                                    src="../assets/img/user8-128x128.jpg"
+                                                    src="<?= ADMIN_ASSETS ?>/img/user8-128x128.jpg"
                                                     alt="User Avatar"
                                             />
 

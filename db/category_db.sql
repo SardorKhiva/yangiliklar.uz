@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS `category`
 (
     `id`     INTEGER PRIMARY KEY AUTOINCREMENT,
-    `name`   TEXT NOT NULL,
+    `name`   TEXT UNIQUE NOT NULL,
     `status` BOOLEAN DEFAULT TRUE
 );
 

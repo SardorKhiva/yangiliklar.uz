@@ -14,10 +14,10 @@ define('PROJECT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/');
 //define('ADMIN_PATH', PROJECT_ROOT . 'admin');
 
 define('ADMIN_ROOT', '/admin');
-const ADMIN_ASSETS = ADMIN_ROOT . '/assets';
-const ADMIN_CSS = ADMIN_ASSETS . '/css';
-const ADMIN_JS = ADMIN_ASSETS . '/js';
-const ADMIN_IMG = ADMIN_ASSETS . '/img';
+const ADMIN_ASSETS = ADMIN_ROOT . '/assets';    //  /admin
+const ADMIN_CSS = ADMIN_ASSETS . '/css';        //  /admin/css
+const ADMIN_JS = ADMIN_ASSETS . '/js';          //  /admin/js
+const ADMIN_IMG = ADMIN_ASSETS . '/img';        //  /admin/img
 
 const FRONT_FAS = "/assets/css/all.min.css";
 

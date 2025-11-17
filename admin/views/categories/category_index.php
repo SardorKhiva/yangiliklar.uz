@@ -1,4 +1,5 @@
 <?php
+//D:\exe\OSPanel_5_4_3\domains\yangiliklar.uz\admin\views\categories\category_index.php
 
 require_once __DIR__ . '/../widgets/header.php';
 require_once __DIR__ . '/../widgets/sidebar.php';
@@ -6,7 +7,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
 ?>
 
 
-<?php if (isset($categoriesAll) && !empty($categoriesAll)): ?>
+<?php if (!empty($categoriesAll)): ?>
 
 
     <div class="card mb-4">
@@ -15,10 +16,23 @@ require_once __DIR__ . '/../widgets/sidebar.php';
         </div>
         <!-- /.card-header -->
             <div class="col-sm-12 d-flex justify-content-end pr-5">
-                <a href="category_index.php" class="btn btn-success">+ qo'shish</a>
+                <a href="?acontroller=category_create" class="btn btn-success">+ qo'shish</a>
             </div>
+
+
+        <?php if (!empty($_SESSION['success'])) : ?>
+            <div class="col-sm-12 mt-2 success_alert">
+                <div class="alert alert-success">
+                    <?= $_SESSION['success']; ?>
+                </div>
+            </div>
+        <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
         <div class="card-body p-0">
             <table class="table table-striped" role="table">
+
+
                 <thead>
                 <tr>
                     <th style="width: 2cm" scope="col">#</th>
@@ -38,7 +52,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                         <td><?= $category['id']; ?> </td>
                         <td> <?= $category['name']; ?> </td>
                         <td>
-                            <?php if ($category['status'] == 1): ; ?>
+                            <?php if ($category['status']): ?>
                                 <label for="switch" class="switch form-label">
                                     <input id="switch"
                                            type="checkbox"
@@ -56,7 +70,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                 <i class="fas fa-pencil"></i>
                             </a>
                             <a href="?acontroller=category_delete&id=<?= $category['id'] ?>"
-                               class="btn btn-danger delete_btn"
+                               class="btn btn-danger delete_category_btn"
                                data-id="<?= $category['id'] ?>">
 
                                 <i class="fas fa-trash"></i>

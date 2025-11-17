@@ -18,8 +18,8 @@
 <!--begin::Script-->
 
 <!--begin::Required Plugin(AdminLTE)-->
-<script src="<?= ADMIN_ASSETS ?>/js/adminlte.js"></script>
-<script src="<?= ADMIN_ASSETS ?>/js/custom.js"></script>
+<script src="/admin/assets/js/adminlte.js"></script>
+<script src="/admin/assets/js/custom.js"></script>
 
 <!--end::Required Plugin(AdminLTE)-->
 

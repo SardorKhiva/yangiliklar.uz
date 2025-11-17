@@ -81,7 +81,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                             required id="menuName"
                                             value="<?= !empty($menuItem['name']) ? $menuItem['name'] : ''; ?>"
                                     />
-                                    <?php if (isset($_POST['name']) && nameExists($_POST['name']))  : ?>
+                                    <?php if (isset($_POST['name']) && menuNameExists($_POST['name']))  : ?>
                                         <div class="mb-2 success_alert">
                                             <label class="form-label"><i
                                                         class="text-accessible-danger"><b><?= $_POST['name'] ?></b> nomi

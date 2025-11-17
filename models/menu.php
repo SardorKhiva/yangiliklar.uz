@@ -76,7 +76,7 @@ function getAllMenus(string $sort = 'id', string $order = 'ASC'): array
     }
 }
 
-function nameExists(string $name, int $id = 0): bool
+function menuNameExists(string $name, int $id = 0): bool
 {
     global $pdo;
 

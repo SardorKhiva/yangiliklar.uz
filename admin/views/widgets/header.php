@@ -30,10 +30,10 @@
     <meta name="supported-color-schemes" content="light dark"/>
 
     <!-- frontend dagi fontawesome ni ishlatamiz:   -->
-    <link rel="stylesheet" href="<?= FRONT_FAS ?>">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
 
     <!--    <base href="/admin/">-->
-    <link rel="preload" href="<?= ADMIN_ASSETS ?>css/adminlte.css" as="style"/>
+    <link rel="preload" href="/admin/assets/css/adminlte.css" as="style"/>
     <!--end::Accessibility Features-->
 
     <!--begin::Fonts-->
@@ -66,7 +66,7 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="<?= ADMIN_ASSETS ?>/css/adminlte.css"/>
+    <link rel="stylesheet" href="/admin/assets/css/adminlte.css"/>
     <!--end::Required Plugin(AdminLTE)-->
 
     <!-- apexcharts -->
@@ -174,7 +174,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <img
-                                            src="../assets/img/user1-128x128.jpg"
+                                            src="/admin/assets/img/user1-128x128.jpg"
                                             alt="User Avatar"
                                             class="img-size-50 rounded-circle me-3"
                                     />
@@ -200,7 +200,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <img
-                                            src="../assets/img/user8-128x128.jpg"
+                                            src="/admin/assets/img/user8-128x128.jpg"
                                             alt="User Avatar"
                                             class="img-size-50 rounded-circle me-3"
                                     />
@@ -226,7 +226,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <img
-                                            src="../assets/img/user3-128x128.jpg"
+                                            src="/admin/assets/img/user3-128x128.jpg"
                                             alt="User Avatar"
                                             class="img-size-50 rounded-circle me-3"
                                     />
@@ -294,7 +294,7 @@
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                         <img
-                                src="../assets/img/user2-160x160.jpg"
+                                src="/admin/assets/img/user2-160x160.jpg"
                                 class="user-image rounded-circle shadow"
                                 alt="User Image"
                         />
@@ -304,7 +304,7 @@
                         <!--begin::User Image-->
                         <li class="user-header text-bg-primary">
                             <img
-                                    src="../assets/img/user2-160x160.jpg"
+                                    src="/admin/assets/img/user2-160x160.jpg"
                                     class="rounded-circle shadow"
                                     alt="User Image"
                             />

@@ -29,7 +29,7 @@ if (!empty($_GET['acontroller'])) {
                 $status = isset($_POST['status']) ? (int)$_POST['status'] : 0;
 
                 if (!empty($name) && !empty($position) && !empty($url)) {
-                    if (!nameExists($name, $id) && !positionExists($position) && !urlExists($url, $id)) {
+                    if (!menuNameExists($name, $id) && !positionExists($position) && !urlExists($url, $id)) {
 
                         if (menuCreate($name, $position, $url, $status)) {
                             $_SESSION['success'] = "Menyu muvaffaqiyatli qo'shildi!";
@@ -76,7 +76,7 @@ if (!empty($_GET['acontroller'])) {
                     // agar bunday qiymatlar oldin menu da bo'lmasa
 //                    if (!menuExists($name, $url, $id)) {
                     // menu yozuvlari id orqali yangilansin
-                    elseif (!nameExists($name, $id) && !urlExists($url) && menuUpdate($id, $name, $position, $url, $status)) {
+                    elseif (!menuNameExists($name, $id) && !urlExists($url) && menuUpdate($id, $name, $position, $url, $status)) {
                         $_SESSION['success'] = "Menyu muvaffaqiyatli tahrirlandi!";
                         header('Location: ?acontroller=menu_index');
                         exit();
