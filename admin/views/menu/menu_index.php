@@ -1,127 +1,135 @@
 <?php
-// D:\exe\OSPanel_5_4_3\domains\yangiliklar.uz\admin\views\menu\menu_index.php
+//D:\exe\OSPanel_5_4_3\domains\yangiliklar.uz\admin\views\menu\menu_index.php
 
 require_once __DIR__ . '/../widgets/header.php';
 require_once __DIR__ . '/../widgets/sidebar.php';
 ?>
 
-    <!--begin::App Main-->
     <main class="app-main">
-        <!--begin::App Content Header-->
         <div class="app-content-header">
-            <!--begin::Container-->
             <div class="container-fluid">
-                <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Menyular</h3>
+                        <h3>Menyular</h3>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item"><a href="/admin">Asosiy</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Menyular</li>
-                        </ol>
-                    </div>
-                    <div class="col-sm-12 d-flex justify-content-end">
+                </div>
+            </div>
+        </div>
+
+        <div class="app-content">
+            <div class="container-fluid">
+
+                <?php if (!empty($menusAll)): ?>
+
+                    <ol class="breadcrumb float-sm-end">
+                        <li class="breadcrumb-item"><a href="/admin">Asosiy</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Menyular</li>
+                    </ol>
+
+                    <div class="col-sm-12 d-flex justify-content-end pr-5 mb-3">
                         <a href="?acontroller=menu_create" class="btn btn-success">+ qo'shish</a>
                     </div>
 
-                    <?php if (!empty($_SESSION['success'])): ?>
-                        <div class="col-sm-12 mt-2 success_alert">
-                            <div class="alert alert-success">
-                                <?= $_SESSION['success']; ?>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title">Menyu nomlari</h3>
+                        </div>
+
+                        <!-- Success alert -->
+                        <?php if (!empty($_SESSION['success'])) : ?>
+                            <div class="col-sm-12 mt-2 success_alert">
+                                <div class="alert alert-success">
+                                    <?= $_SESSION['success']; ?>
+                                </div>
+                            </div>
+                            <?php unset($_SESSION['success']); ?>
+                        <?php endif; ?>
+
+                        <!-- Error alert -->
+                        <?php if (!empty($_SESSION['error'])) : ?>
+                            <div class="col-sm-12 mt-2 failed_alert">
+                                <div class="alert alert-danger">
+                                    <?= $_SESSION['error']; ?>
+                                </div>
+                            </div>
+                            <?php unset($_SESSION['error']); ?>
+                        <?php endif; ?>
+
+                        <!-- table-responsive qo'shish va p-0 saqlab qolish -->
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0" role="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nomi</th>
+                                        <th scope="col">Pozitsiya</th>
+                                        <th scope="col">URL</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Tahrirlash</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php $i = 1;
+                                    foreach ($menusAll as $menuItem): ?>
+                                        <tr class="align-middle">
+                                            <td><?= $i++ ?></td>
+                                            <td><?= $menuItem['id']; ?></td>
+                                            <td><?= htmlspecialchars($menuItem['name'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                            <td><?= $menuItem['position']; ?></td>
+                                            <td>
+                                                <!--  keyinchalik commentdan olinadi -->
+                                                <!-- <a href="<?= htmlspecialchars($menuItem['url'], ENT_QUOTES, 'UTF-8'); ?>"
+                                                   target="_blank"
+                                                   class="text-primary"> -->
+                                                <?= htmlspecialchars($menuItem['url'], ENT_QUOTES, 'UTF-8'); ?>
+                                                <!--                                                </a>-->
+                                            </td>
+                                            <td>
+                                                <?php if ($menuItem['status']): ?>
+                                                    <label for="switch-<?= $menuItem['id'] ?>"
+                                                           class="switch form-label mb-0">
+                                                        <input id="switch-<?= $menuItem['id'] ?>"
+                                                               type="checkbox"
+                                                               name="status"
+                                                               disabled
+                                                               value="<?= ACTIVE ?>"
+                                                                <?= $menuItem['status'] === ACTIVE ? 'checked' : ''; ?>>
+                                                        <span class="slider"></span>
+                                                    </label>
+                                                <?php else: ?>
+                                                    <span class="badge bg-secondary">O'chirilgan</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td class="text-nowrap">
+                                                <a href="?acontroller=menu_update&id=<?= $menuItem['id'] ?>"
+                                                   class="btn btn-success btn-sm">
+                                                    <i class="fas fa-pencil"></i>
+                                                </a>
+                                                <a href="?acontroller=menu_delete&id=<?= $menuItem['id'] ?>"
+                                                   class="btn btn-danger btn-sm delete_btn"
+                                                   data-id="<?= $menuItem['id'] ?>">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    <?php endif; ?>
-                    <?php unset($_SESSION['success']); ?>
+                    </div>
 
-                </div>
-                <!--end::Row-->
+                <?php else: ?>
+                    <div class="alert alert-info">
+                        Hozircha menyular yo'q. <a href="?acontroller=menu_create">Birinchi menyuni qo'shing</a>
+                    </div>
+                <?php endif; ?>
+
             </div>
-            <!--end::Container-->
         </div>
-        <!--end::App Content Header-->
-        <!--begin::App Content-->
-        <div class="app-content">
-            <!--begin::Container-->
-            <div class="container-fluid">
-                <!-- boshlanish::Jadval            -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h3 class="card-title">Menyular</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table class="table table-bordered" role="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>ID</th>
-                                <th>Nomi</th>
-                                <th>Pozitsiyasi</th>
-                                <th>URL</th>
-                                <th>Status</th>
-                                <th>Amallar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i = 1;
-                            if (!empty($menusAll)): ?>
-                                <?php foreach ($menusAll as $menu): ?>
-                                    <tr class="align-middle">
-                                        <td><?= $i++ ?></td>
-                                        <td><?= $menu['id'] ?></td>
-                                        <td><?= $menu['name'] ?></td>
-                                        <td><?= $menu['position'] ?></td>
-                                        <td><?= $menu['url'] ?></td>
-                                        <td><?= $menu['status'] ?></td>
-                                        <td>
-                                            <a href="?acontroller=menu_update&id=<?= $menu['id'] ?>"
-                                               class="btn btn-success">
-                                                <i class="fas fa-pencil"></i>
-                                            </a>
-                                            <a href="?acontroller=menu_delete&id=<?= $menu['id'] ?>"
-                                               class="btn btn-danger delete_btn"
-                                               data-id="<?= $menu['id'] ?>">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--
-                     /.card-body
-                    <div class="card-footer clearfix">
-                        <ul class="pagination pagination-sm m-0 float-end">
-                            <li class="page-item">
-                                <a class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">&raquo;</a>
-                            </li>
-                        </ul>
-                    </div>
-                    -->
-                </div>
-                <!-- tugash::Jadval            -->
-            </div>
-            <!--end::Container-->
-        </div>
-        <!--end::App Content-->
     </main>
-    <!--end::App Main-->
 
-<?php
-require_once __DIR__ . '/../widgets/footer.php';
+<?php require_once __DIR__ . "/../widgets/footer.php"; ?>

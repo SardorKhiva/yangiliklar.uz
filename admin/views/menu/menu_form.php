@@ -1,8 +1,8 @@
 <?php
+//D:\exe\OSPanel_5_4_3\domains\yangiliklar.uz\admin\views\menu\menu_form.php
 
 require_once __DIR__ . '/../widgets/header.php';
 require_once __DIR__ . '/../widgets/sidebar.php';
-//require_once __DIR__ . '/../widgets/content.php':
 ?>
 
     <!--begin::App Main-->
@@ -59,12 +59,15 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                               action="?acontroller=<?= !empty($menuItem['id']) ? 'menu_update&id=' . $menuItem['id'] : 'menu_create'; ?>">
                             <!--begin::Body-->
                             <div class="card-body">
+
+                                <!-- menu ID -->
                                 <?php if (!empty($menuItem['id'])) : ?>
                                     <label class="form-label">Menyu ID: </label>
                                     <div class="mb-3 form-control bg-danger-subtle"> <?= $menuItem['id']; ?>
                                     </div>
                                 <?php endif; ?>
 
+                                <!-- menu name -->
                                 <div class="mb-3">
                                     <label for="menuName" class="form-label">Nomi</label>
                                     <input
@@ -84,6 +87,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                     <?php endif; ?>
                                 </div>
 
+                                <!-- menu position -->
                                 <div class="mb-3">
                                     <label for="menuPosition" class="form-label">Pozitsiyasi</label>
                                     <input
@@ -98,6 +102,8 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                             value="<?= !empty($menuItem['position']) ? $menuItem['position'] : getMaxMenuPosition() + 1; ?>"
                                     />
                                 </div>
+
+                                <!-- Menu URL -->
                                 <div class="mb-3">
                                     <label for="menuUrl" class="form-label">URL</label>
                                     <input
@@ -117,6 +123,8 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                         </div>
                                     <?php endif; ?>
                                 </div>
+
+                                <!-- Menu status -->
                                 <div class="mb-3">
 
                                     <!-- bu oddiyroq select form:
@@ -136,7 +144,7 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                                type="checkbox"
                                                name="status"
                                                value="<?= ACTIVE ?>"
-                                                <?= isset($menuItem) && $menuItem['status'] === ACTIVE ? 'checked' : ''; ?>>
+                                                <?= isset($menuItem) && $menuItem['status'] === ACTIVE ? 'checked' : 'unchecked'; ?>>
                                         <span class="slider"></span>
                                     </label>
 
@@ -161,6 +169,5 @@ require_once __DIR__ . '/../widgets/sidebar.php';
         <!--end::App Content-->
     </main>
     <!--end::App Main-->
-    ?>
 <?php
 require_once __DIR__ . '/../widgets/footer.php';
