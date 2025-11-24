@@ -9,5 +9,11 @@ if (file_exists(__DIR__ . '/../../models/mainModel.php')) {
     exit("Asosiy model ulanmagan!");
 }
 
+// menu ni boshqaruvchi controller:
 require_once __DIR__ . '/menuAdminController.php';
+
+// kategoriyalarni boshqaruvchi controller:
 require_once __DIR__ . '/categoryAdminController.php';
+
+// yangiliklarni bohqaruvchi:
+require_once __DIR__ . '/newsAdminController.php';

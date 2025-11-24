@@ -16,6 +16,7 @@ $socials = getSocials();                // footer dagi ijtimoiy tarmoqlar
 $categories = getCategories();          // yangiliklar kategoriyalari
 $categoriesAll = getAllCategories();    // hamma kategoriyalar
 $news = getLastNews();                  // oxirgi 3 ta yangilik
+$activeNews = getActiveNews();          // barcha faol yangiliklar
 $allNews = getAllNews();                // barcha yangiliklar
 $banner = getBannerNews();              // bannerdagi yangiliklar, standart 6 ta
 
