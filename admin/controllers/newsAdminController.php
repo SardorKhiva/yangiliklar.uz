@@ -70,7 +70,7 @@ if (!empty($_GET['acontroller'])) {
             break;
         }
 
-        case 'news_edit':
+        case 'news_update':
         {
 //            echo 1;
             require_once __DIR__ . '/../views/news/news_form.php';
@@ -79,6 +79,18 @@ if (!empty($_GET['acontroller'])) {
 
         case 'news_delete':
         {
+            if (!empty($_GET['id'])) {
+                $id = (int)$_GET['id'] ?? 0;
+
+                if (newsDelete($id)) {
+                    $_SESSION['success'] = "Yangilik o'chirildi!";
+                } else {
+                    $_SESSION['error'] = "Yangilik o'chirishda xatolik!";
+                }
+                header("Location: ?acontroller=news_index");
+                exit();
+            }
+
             break;
         }
     }

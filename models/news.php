@@ -341,3 +341,20 @@ function lastNewsID(): ?int
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row ? (int)$row['seq'] + 1 : null;
 }
+
+function newsDelete(int $id): bool
+{
+    global $pdo;
+
+    $delete = "DELETE 
+               FROM `news` 
+               WHERE `id` = :id;";
+    try {
+        $stmt = $pdo->prepare($delete);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        error_log("newsDelete() error: " . $e->getMessage());
+        return false;
+    }
+}
