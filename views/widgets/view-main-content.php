@@ -35,7 +35,8 @@
                                     <!-- 730 x 322 px rasm -->
                                     <a>
                                         <img src="<?= $image; ?>"
-                                             style="height: 322px; width: 730px; object-fit: cover"
+
+                                             class="img-fluid"
                                              alt="<?= $newsItem['sarlavha']; ?> ">
                                     </a>
                                 </div>
