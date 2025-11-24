@@ -88,6 +88,7 @@ require_once __DIR__ . '/../../../models/authors.php';
                                             type="text"
                                             name="sarlavha"
                                             class="form-control"
+                                            autofocus
                                             required
                                             id="sarlavha"
                                             value="<?= !empty($newsOneItem['sarlavha']) ? $newsOneItem['sarlavha'] : '' ?>"
@@ -99,6 +100,7 @@ require_once __DIR__ . '/../../../models/authors.php';
                                     <label for="qisqa_tavsif" class="form-label">Qisqa tavsif</label>
                                     <textarea class="form-control"
                                               name="qisqa_tavsif"
+                                              autofocus
                                               placeholder="Yangilik haqida qisqacha yozuv yozing"
                                               id="qisqa_tavsif"
                                               cols="10"
@@ -108,54 +110,57 @@ require_once __DIR__ . '/../../../models/authors.php';
                                 </div>
 
                                 <!-- yangilik kategoriyasi -->
-                                <select
-                                        name="kategoriya"
-                                        id="kategoriya"
-                                        required
-                                        class="form-select">
-                                    <option value="">Kategoriyani tanlang</option>
-                                    <?php foreach ($categories as $categoryOneItem) :
-                                        $catId = (string)$categoryOneItem['id'];
+                                <div class="mb-3">
+                                    <label for="kategoriya" class="form-label">Kategoriyani tanlang
+                                        <select
+                                                name="kategoriya"
+                                                id="kategoriya"
+                                                required
+                                                class="form-select">
+                                            <?php foreach ($categories as $categoryOneItem) :
+                                                $catId = (string)$categoryOneItem['id'];
 
-                                        // 1) tahrirlash rejimida mavjud yangilikdan olinadigan qiymat
-                                        $selectedFromItem = !empty($newsOneItem) && isset($newsOneItem['category_id']) && (string)$newsOneItem['category_id'] === $catId;
+                                                // 1) tahrirlash rejimida mavjud yangilikdan olinadigan qiymat
+                                                $selectedFromItem = !empty($newsOneItem) && isset($newsOneItem['category_id']) && (string)$newsOneItem['category_id'] === $catId;
 
-                                        // 2) formani submit qilib qaytarishda POST qiymatidan olinadigan tanlov
-                                        $selectedFromPost = isset($_POST['kategoriya']) && (string)$_POST['kategoriya'] === $catId;
+                                                // 2) formani submit qilib qaytarishda POST qiymatidan olinadigan tanlov
+                                                $selectedFromPost = isset($_POST['kategoriya']) && (string)$_POST['kategoriya'] === $catId;
 
-                                        // oxirida tanlanganmi?
-                                        $isSelected = $selectedFromItem || $selectedFromPost;
-                                        ?>
-                                        <option value="<?= htmlspecialchars($catId) ?>" <?= $isSelected ? 'selected' : '' ?>>
-                                            <?= htmlspecialchars($categoryOneItem['name']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
+                                                // oxirida tanlanganmi?
+                                                $isSelected = $selectedFromItem || $selectedFromPost;
+                                                ?>
+                                                <option value="<?= htmlspecialchars($catId) ?>" <?= $isSelected ? 'selected' : '' ?>>
+                                                    <?= htmlspecialchars($categoryOneItem['name']) ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </label>
+                                </div>
 
 
                                 <!-- yangilik muallif -->
                                 <div class="mb-3">
                                     <label for="muallif"
                                            class="form-label">
-                                        Muallif
-                                    </label>
-                                    <select
-                                            name="muallif"
-                                            id="muallif"
-                                            class="form-select">
-                                        <option value="">Muallifni tanlang</option>
+                                        Muallifni tanlang
+                                        <select
+                                                name="muallif"
+                                                id="muallif"
+                                                required
+                                                class="form-select">
 
-                                        <?php foreach ($allAuthors as $authorItem) : ?>
-                                            <option
-                                                    value="<?= $authorItem['id']; ?>"
-                                                    <?php if (!empty($newsOneItem) && $newsOneItem['author_id'] == $authorItem['id']) : ?>
-                                                        selected
-                                                    <?php endif; ?>
-                                            >
-                                                <?= $authorItem['name']; ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                            <?php foreach ($allAuthors as $authorItem) : ?>
+                                                <option
+                                                        value="<?= $authorItem['id']; ?>"
+                                                        <?php if (!empty($newsOneItem) && $newsOneItem['author_id'] == $authorItem['id']) : ?>
+                                                            selected
+                                                        <?php endif; ?>
+                                                >
+                                                    <?= $authorItem['name']; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </label>
                                 </div>
 
                                 <!-- yangilik matni -->

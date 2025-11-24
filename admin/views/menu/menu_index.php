@@ -110,7 +110,10 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                                 </a>
                                                 <a href="?acontroller=menu_delete&id=<?= $menuItem['id'] ?>"
                                                    class="btn btn-danger btn-sm delete_btn"
-                                                   data-id="<?= $menuItem['id'] ?>">
+                                                   data-type="menu"
+                                                   data-id="<?= $menuItem['id'] ?>"
+                                                   data-name="<?= $menuItem['name'] ?>"
+                                                >
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>

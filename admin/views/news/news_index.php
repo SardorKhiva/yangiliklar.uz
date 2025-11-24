@@ -160,7 +160,9 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                                     </a>
                                                     <a href="?acontroller=news_delete&id=<?= $newsOneItem['news_id'] ?>"
                                                        class="btn btn-danger btn-sm delete_btn"
-                                                       data-id="<?= $newsOneItem['news_id'] ?>"
+                                                       data-type="news"
+                                                       data-id="<?= $newsOneItem['news_id']; ?>"
+                                                       data-name="<?= $newsOneItem['sarlavha'] ?>"
                                                        title="O'chirish">
                                                         <i class="fas fa-trash"></i>
                                                     </a>

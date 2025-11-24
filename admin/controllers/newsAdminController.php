@@ -20,29 +20,6 @@ if (!empty($_GET['acontroller'])) {
         }
         case 'news_create':
         {
-//            if (!empty($_POST)){
-//                dd($_FILES, 0);
-//                dd($_POST, 1);
-//            }
-            /*
-        $_FILES
-            [name] => 548211786_2080016399199683_5005779165654564778_n.jpg
-            [full_path] => 548211786_2080016399199683_5005779165654564778_n.jpg
-            [type] => image/jpeg
-            [tmp_name] => D:\exe\OSPanel_5_4_3\userdata\temp\php2F7F.tmp
-            [error] => 0
-            [size] => 31862
-
-        $_POST
-            [sarlavha] => Sarlavha
-            [qisqa_tavsif] => Qisqa tavsif
-            [kategoriya] => 1
-            [muallif] => 1
-            [yangilik_matni] => body
-            [status] => 1
-
-             */
-
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $sarlavha = trim($_POST['sarlavha'] ?? '');
                 $qisqa_tavsif = trim($_POST['qisqa_tavsif'] ?? '');

@@ -1,22 +1,7 @@
 // custom.js
 
 // Sahifa to'liq yuklangandan keyin ishga tushirish
-document.addEventListener('DOMContentLoaded', function() {
-
-    // ====================================================
-    // 1. Menu elementini o'chirish mantiqi
-    // ====================================================
-    let deleteBtns = document.querySelectorAll(".delete_btn");
-    deleteBtns.forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            let id = btn.getAttribute('data-id');
-            let confirmed = confirm("Rostdan ham menyu elementini o'chirmoqchimisiz?");
-            if (confirmed) {
-                window.location.href = "?acontroller=menu_delete&id=" + id;
-            }
-        });
-    });
+document.addEventListener('DOMContentLoaded', function () {
 
     // ====================================================
     // 2. Alert xabarlarini avtomatik yashirish mantiqi
@@ -34,23 +19,45 @@ document.addEventListener('DOMContentLoaded', function() {
     let failed_alerts = document.querySelectorAll('.failed_alert');
     if (failed_alerts.length > 0) {
         setTimeout(function () {
-            failed_alerts.forEach(function(alert) {
+            failed_alerts.forEach(function (alert) {
                 alert.style.display = "none";
             });
         }, 3000);
     }
 
-    // ====================================================
-    // 3. Kategoriyani o'chirish mantiqi
-    // ====================================================
-    document.querySelectorAll('.delete_category_btn').forEach(btn => {
-        btn.onclick = (e) => {
-            e.preventDefault();
-            const id = btn.dataset.id;
-            if (confirm(`ID: ${id} - Kategoriyani o'chirmoqchimisiz?\n\nBu amalni qaytarib bo'lmaydi!`)) {
-                window.location.href = btn.href;
-            }
-        };
-    });
 
 }); // DOMContentLoaded tugadi
+
+// ====================================================
+// 2. Elementlarni o'chirishning universal mantiq'i
+// ====================================================
+
+document.querySelectorAll('.delete_btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+
+        const id = btn.dataset.id;
+        const type = btn.dataset.type;
+        const name = btn.dataset.name || '';
+
+        // o'chiriladigan elementlar ro'yhati
+        const messages = {
+            news: "yangilikni",
+            menu: "menyu elementini",
+            category: "kategoriyani",
+            author: "maullifni"
+        };
+
+        let text = messages[type] || "elementni";
+
+        let confirmed = confirm(
+            // `ID: ${id} ${name ? '(' + name + ')' : ''}\n\n` +
+            `Rostdan ham ${text} o'chirmoqchimisiz?\n` +
+            `Bu amalni qaytarib bo'lmaydi!`
+        );
+
+        if (confirmed) {
+            window.location.href = btn.href;
+        }
+    })
+})

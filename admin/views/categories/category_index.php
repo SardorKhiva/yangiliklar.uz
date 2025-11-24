@@ -94,8 +94,11 @@ require_once __DIR__ . '/../widgets/sidebar.php';
                                                 <i class="fas fa-pencil"></i>
                                             </a>
                                             <a href="?acontroller=category_delete&id=<?= $category['id'] ?>"
-                                               class="btn btn-danger delete_category_btn"
-                                               data-id="<?= $category['id'] ?>">
+                                               class="btn btn-danger btn-sm delete_btn"
+                                               data-type="category"
+                                               data-id="<?= $category['id'] ?>"
+                                               data-name="<?= $category['name'] ?>"
+                                            >
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
