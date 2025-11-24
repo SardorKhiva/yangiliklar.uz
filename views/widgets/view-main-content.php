@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var $newsItem - ma'lum bir yangilik
+ */
+?>
 <section class="call-to-action">
     <div class="container">
         <div class="row">

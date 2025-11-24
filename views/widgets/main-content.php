@@ -36,7 +36,7 @@
                                                 <div class="blog-thumb">
                                                     <a href="?controller=news_view&id=<?= htmlspecialchars($news_item['news_id']); ?>">
                                                         <img src="<?= $image; ?>"
-                                                             style="height: 269px; width: 610px; object-fit: cover"
+                                                             class="img-fluid"
                                                              alt="<?= $news_item['sarlavha']; ?> ">
                                                     </a>
                                                 </div>
