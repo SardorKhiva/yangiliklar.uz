@@ -408,9 +408,11 @@ header .navbar {
 /* uzm yozg'on stil */
 .blog-thumb img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
     border-radius: 10px;
+    aspect-ratio: 16 / 9; /* yoki 4/3, 3/2 — */
+
 }
 
 

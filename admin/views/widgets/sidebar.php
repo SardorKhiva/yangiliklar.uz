@@ -52,6 +52,13 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="?acontroller=category_index" class="nav-link active">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Yangilik kategoriyalari</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
